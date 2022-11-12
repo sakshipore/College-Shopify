@@ -1,4 +1,5 @@
 import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
@@ -61,8 +62,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 height: 30.h,
               ),
-              Button(
-                text: "SIGN UP",
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                },
+                child: Button(
+                  text: "SIGN UP",
+                ),
               ),
             ],
           ),

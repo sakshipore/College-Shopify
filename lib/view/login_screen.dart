@@ -1,4 +1,5 @@
 import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/view/signup_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
@@ -70,8 +71,18 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50.h,
               ),
-              Button(
-                text: "LOGIN",
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                },
+                child: Button(
+                  text: "LOGIN",
+                ),
               ),
             ],
           ),
