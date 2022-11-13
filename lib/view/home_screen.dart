@@ -1,4 +1,5 @@
 import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/view/display_products_screen.dart';
 import 'package:college_shopify/view/products_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
@@ -16,46 +17,48 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 50.h,
-              ),
-              HeadingText(text: "Home"),
-              SizedBox(
-                height: 75.h,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductsScreen(),
-                    ),
-                  );
-                },
-                child: performCard(
-                    "Selling Product", "assets/images/selling_product.png"),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductsScreen(),
-                    ),
-                  );
-                },
-                child: performCard(
-                    "Buying Product", "assets/images/buying_product.jpg"),
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50.h,
+                ),
+                HeadingText(text: "Home"),
+                SizedBox(
+                  height: 75.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductsScreen(),
+                      ),
+                    );
+                  },
+                  child: performCard(
+                      "Selling Product", "assets/images/selling_product.png"),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DisplayProductsScreen(),
+                      ),
+                    );
+                  },
+                  child: performCard(
+                      "Buying Product", "assets/images/buying_product.jpg"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

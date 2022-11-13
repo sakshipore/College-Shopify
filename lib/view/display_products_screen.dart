@@ -1,19 +1,19 @@
 import 'package:college_shopify/utils/text_style.dart';
-import 'package:college_shopify/view/new_book_entry_screen.dart';
-import 'package:college_shopify/view/new_stationary_entry_screen.dart';
-import 'package:college_shopify/view/new_technical_entry_screen.dart';
+import 'package:college_shopify/view/display_book_product_screen.dart';
+import 'package:college_shopify/view/display_stationary_product_screen.dart';
+import 'package:college_shopify/view/display_technical_product_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
+class DisplayProductsScreen extends StatefulWidget {
+  const DisplayProductsScreen({super.key});
 
   @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
+  State<DisplayProductsScreen> createState() => _DisplayProductsScreenState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewBookEntryScreen(),
+                        builder: (context) => DisplayBookProductScreen(),
                       ),
                     );
                   },
@@ -50,7 +50,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewStationaryEntryScreen(),
+                        builder: (context) => DisplayStationaryProductScreen(),
                       ),
                     );
                   },
@@ -65,7 +65,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewTechnicalEntryScreen(),
+                        builder: (context) => DisplayTechnicalProductScreen(),
                       ),
                     );
                   },
