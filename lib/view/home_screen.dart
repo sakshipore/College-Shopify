@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                HeadingText(text: "Home"),
+                headingText(text: "Home"),
                 SizedBox(
                   height: 75.h,
                 ),

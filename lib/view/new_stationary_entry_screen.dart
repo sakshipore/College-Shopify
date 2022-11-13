@@ -28,7 +28,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                HeadingText(text: "Stationary"),
+                headingText(text: "Stationary"),
                 SizedBox(
                   height: 75.h,
                 ),

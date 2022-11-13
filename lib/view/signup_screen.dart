@@ -27,9 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 height: 50.h,
               ),
-              HeadingText(
-                text: "Sign Up",
-              ),
+              headingText(text: "Sign Up"),
               SizedBox(
                 height: 75.h,
               ),
@@ -55,11 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 170.w),
-                  // TODO : Don't make classes just for text widgets instead make predefined textStyles
-                  // TODO : Apply this for all text
-                  child: NormalText(
-                    text: "Already have an account?",
-                  ),
+                  child: normalText(text: "Already have an account?"),
                 ),
               ),
               SizedBox(
@@ -68,6 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Button(
                 text: "SIGN UP",
                 onTap: () {
+                  // TODO : Aise navigate nahi hoga Navigator.push() likh
                   HomeScreen();
                 },
               ),
@@ -77,7 +72,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-
-  // TODO : Take input of TextEditingController and assign it to TextFormField
-
 }

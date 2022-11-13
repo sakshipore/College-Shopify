@@ -28,7 +28,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                HeadingText(text: "Products"),
+                headingText(text: "Products"),
                 SizedBox(
                   height: 75.h,
                 ),
@@ -37,6 +37,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
+                    // TODO : Aise navigate nahi hoga Navigator.push() likh
                     NewBookEntryScreen();
                   },
                 ),

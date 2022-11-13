@@ -28,9 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50.h,
               ),
-              HeadingText(
-                text: "Login",
-              ),
+              headingText(text: "Login"),
               SizedBox(
                 height: 75.h,
               ),
@@ -49,9 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 175.w),
-                  child: NormalText(
-                    text: "Don't have an account?",
-                  ),
+                  child: normalText(text: "Don't have an account?"),
                 ),
               ),
               SizedBox(
@@ -60,7 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Button(
                 text: "LOGIN",
                 onTap: () {
-                  HomeScreen();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  // HomeScreen();
                 },
               ),
             ],
