@@ -1,8 +1,9 @@
-import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/view/new_book_entry_screen.dart';
 import 'package:college_shopify/view/new_stationary_entry_screen.dart';
 import 'package:college_shopify/view/new_technical_entry_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
+import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,102 +32,40 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 SizedBox(
                   height: 75.h,
                 ),
-                GestureDetector(
+                ProductCard(
+                  text: "Books",
+                  image: "assets/images/book_product.jpg",
+                  height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewBookEntryScreen(),
-                      ),
-                    );
+                    NewBookEntryScreen();
                   },
-                  child: productCard("Books", "assets/images/book_product.jpg"),
                 ),
                 SizedBox(
                   height: 25.h,
                 ),
-                GestureDetector(
+                ProductCard(
+                  text: "Stationary",
+                  image: "assets/images/stationary_product.jpg",
+                  height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewStationaryEntryScreen(),
-                      ),
-                    );
+                    NewStationaryEntryScreen();
                   },
-                  child: productCard(
-                      "Stationary", "assets/images/stationary_product.jpg"),
                 ),
                 SizedBox(
                   height: 25.h,
                 ),
-                GestureDetector(
+                ProductCard(
+                  text: "Technical",
+                  image: "assets/images/technical_product.jpg",
+                  height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewTechnicalEntryScreen(),
-                      ),
-                    );
+                    NewTechnicalEntryScreen();
                   },
-                  child: productCard(
-                      "Technical", "assets/images/technical_product.jpg"),
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  // TODO : U have already made same widget for this i.e. performCard
-  Widget productCard(String text, String image) {
-    return Container(
-      width: 350.w,
-      height: 150.h,
-      decoration: BoxDecoration(
-        color: Color(0xff2140B1),
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 10.w),
-            child: Center(
-              child: SizedBox(
-                width: 150.w,
-                child: Text(
-                  text,
-                  style: MyTextStyle.normalLatoFont
-                      .copyWith(
-                        fontSize: 30.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      )
-                      .copyWith(
-                        overflow: TextOverflow.clip,
-                      ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 150.h,
-            width: 173.w,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10.r),
-                bottomRight: Radius.circular(10.r),
-              ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

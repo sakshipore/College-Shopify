@@ -1,7 +1,8 @@
-import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/view/signup_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
+import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          //TODO : Use .w
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(15.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,23 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 75.h,
               ),
-              // TODO  : U have made widget for form field
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Mobile No",
-                  hintStyle: MyTextStyle.normalLatoFont.copyWith(
-                    fontSize: 14.sp,
-                    color: Color(0xff9B9B9B),
-                    fontWeight: FontWeight.w400,
-                  ),
-                  labelText: "Mobile No",
-                  labelStyle: MyTextStyle.normalLatoFont.copyWith(
-                    fontSize: 14.sp,
-                    color: Color(0xff9B9B9B),
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-              ),
+              FormText(text: "Mobile No"),
               SizedBox(
                 height: 16.h,
               ),
@@ -73,20 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50.h,
               ),
-              //  TODO : This on tap should be moved inside custom Button widget
-              //? because you are writing GestureDetection again and again
-              GestureDetector(
+              Button(
+                text: "LOGIN",
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ),
-                  );
+                  HomeScreen();
                 },
-                child: Button(
-                  text: "LOGIN",
-                ),
               ),
             ],
           ),

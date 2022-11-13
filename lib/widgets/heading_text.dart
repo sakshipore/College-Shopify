@@ -1,9 +1,9 @@
-import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeadingText extends StatelessWidget {
-  String text;
+  final String text;
   HeadingText({super.key, required this.text});
 
   @override

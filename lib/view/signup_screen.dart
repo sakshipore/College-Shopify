@@ -1,6 +1,7 @@
-import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
+import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
@@ -32,19 +33,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 height: 75.h,
               ),
-              formField("First Name"),
+              FormText(text: "First Name"),
               SizedBox(
                 height: 10.h,
               ),
-              formField("Last Name"),
+              FormText(text: "Last Name"),
               SizedBox(
                 height: 10.h,
               ),
-              formField("Address"),
+              FormText(text: "Address"),
               SizedBox(
                 height: 10.h,
               ),
-              formField("Mobile No"),
+              FormText(text: "Mobile No"),
               SizedBox(
                 height: 16.h,
               ),
@@ -64,18 +65,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 height: 30.h,
               ),
-              GestureDetector(
+              Button(
+                text: "SIGN UP",
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ),
-                  );
+                  HomeScreen();
                 },
-                child: Button(
-                  text: "SIGN UP",
-                ),
               ),
             ],
           ),
@@ -84,25 +78,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  // TODO : Move this widget to utils.dart and make this as StatlessWidget not just function which return Widget
-  Widget formField(String field) {
-    // TODO : Take input of TextEditingController and assign it to TextFormField
-    // TODO : Replace the name of String from field to hintText or text
-    return TextFormField(
-      decoration: InputDecoration(
-        hintText: field,
-        hintStyle: MyTextStyle.normalLatoFont.copyWith(
-          fontSize: 14.sp,
-          color: Color(0xff9B9B9B),
-          fontWeight: FontWeight.w400,
-        ),
-        labelText: field,
-        labelStyle: MyTextStyle.normalLatoFont.copyWith(
-          fontSize: 11.sp,
-          color: Color(0xff9B9B9B),
-          fontWeight: FontWeight.w300,
-        ),
-      ),
-    );
-  }
+  // TODO : Take input of TextEditingController and assign it to TextFormField
+
 }

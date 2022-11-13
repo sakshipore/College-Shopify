@@ -1,7 +1,8 @@
-import 'package:college_shopify/utils/text_style.dart';
+import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/view/display_products_screen.dart';
 import 'package:college_shopify/view/products_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
+import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,91 +31,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 75.h,
                 ),
-                // TODO :  Move this onTap inside PerformCard
-                GestureDetector(
+                ProductCard(
+                  text: "Selling Product",
+                  image: "assets/images/selling_product.png",
+                  height: 200,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductsScreen(),
-                      ),
-                    );
+                    ProductsScreen();
                   },
-                  child: performCard(
-                      "Selling Product", "assets/images/selling_product.png"),
                 ),
                 SizedBox(
                   height: 30.h,
                 ),
-                GestureDetector(
+                ProductCard(
+                  text: "Buying Product",
+                  image: "assets/images/buying_product.jpg",
+                  height: 200,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayProductsScreen(),
-                      ),
-                    );
+                    DisplayProductsScreen();
                   },
-                  child: performCard(
-                      "Buying Product", "assets/images/buying_product.jpg"),
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  // TODO : Make statless widget and move this in utils.dart
-
-  Widget performCard(String text, String image) {
-    return Container(
-      width: 350.w,
-      height: 200.h,
-      decoration: BoxDecoration(
-        color: Color(0xff2140B1),
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 10.w),
-            child: Center(
-              child: SizedBox(
-                width: 150.w,
-                child: Text(
-                  text,
-                  style: MyTextStyle.normalLatoFont
-                      .copyWith(
-                        fontSize: 30.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      )
-                      // TODO : Use only onw copyWith function
-                      .copyWith(
-                        overflow: TextOverflow.clip,
-                      ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 200.h,
-            width: 173.w,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10.r),
-                bottomRight: Radius.circular(10.r),
-              ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
