@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 75.h,
                 ),
+                // TODO :  Move this onTap inside PerformCard
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -65,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // TODO : Make statless widget and move this in utils.dart
+
   Widget performCard(String text, String image) {
     return Container(
       width: 350.w,
@@ -89,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
                       )
+                      // TODO : Use only onw copyWith function
                       .copyWith(
                         overflow: TextOverflow.clip,
                       ),

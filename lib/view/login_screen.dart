@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
+          //TODO : Use .w
           padding: EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 75.h,
               ),
+              // TODO  : U have made widget for form field
               TextFormField(
                 decoration: InputDecoration(
                   hintText: "Mobile No",
@@ -71,6 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50.h,
               ),
+              //  TODO : This on tap should be moved inside custom Button widget
+              //? because you are writing GestureDetection again and again
               GestureDetector(
                 onTap: () {
                   Navigator.push(

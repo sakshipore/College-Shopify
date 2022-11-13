@@ -1,9 +1,9 @@
 import 'package:college_shopify/utils/text_style.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Button extends StatelessWidget {
+  // TODO : Make variables as final if they are not begin updated
   String text;
   Button({super.key, required this.text});
 

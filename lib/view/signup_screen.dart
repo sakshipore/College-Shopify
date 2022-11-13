@@ -54,6 +54,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 170.w),
+                  // TODO : Don't make classes just for text widgets instead make predefined textStyles
+                  // TODO : Apply this for all text
                   child: NormalText(
                     text: "Already have an account?",
                   ),
@@ -82,7 +84,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  // TODO : Move this widget to utils.dart and make this as StatlessWidget not just function which return Widget
   Widget formField(String field) {
+    // TODO : Take input of TextEditingController and assign it to TextFormField
+    // TODO : Replace the name of String from field to hintText or text
     return TextFormField(
       decoration: InputDecoration(
         hintText: field,

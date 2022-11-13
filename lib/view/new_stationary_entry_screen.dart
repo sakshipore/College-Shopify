@@ -47,6 +47,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
     );
   }
 
+  // TODO : Exact same widget is present in signup_screen.dart
   Widget formField(String field) {
     return TextFormField(
       decoration: InputDecoration(

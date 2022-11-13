@@ -35,19 +35,19 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
                   height: 10.h,
                 ),
                 formField("Company Name"),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 formField("Model No"),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 formField("Specification"),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 formField("Bill No"),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 formField("Cost"),
@@ -63,6 +63,7 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
     );
   }
 
+  // TODO : Exact same widget present in signup_screen.dart
   Widget formField(String field) {
     return TextFormField(
       decoration: InputDecoration(

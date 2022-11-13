@@ -80,6 +80,7 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
     );
   }
 
+  // TODO : U have already made same widget for this i.e. performCard
   Widget productCard(String text, String image) {
     return Container(
       width: 350.w,
