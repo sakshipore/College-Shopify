@@ -27,7 +27,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                HeadingText(text: "Books"),
+                headingText(text: "Books"),
                 SizedBox(
                   height: 75.h,
                 ),

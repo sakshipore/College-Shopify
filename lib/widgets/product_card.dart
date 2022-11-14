@@ -1,5 +1,3 @@
-
-
 import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,14 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProductCard extends StatelessWidget {
   final String text;
   final String image;
-  final int height;
+  final double height;
   final VoidCallback onTap;
-  ProductCard(
-      {super.key,
-      required this.text,
-      required this.image,
-      required this.height, 
-      required this.onTap,});
+  ProductCard({
+    super.key,
+    required this.text,
+    required this.image,
+    required this.height,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

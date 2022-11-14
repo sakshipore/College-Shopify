@@ -28,7 +28,7 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                HeadingText(text: "Products"),
+                headingText(text: "Products"),
                 SizedBox(
                   height: 75.h,
                 ),

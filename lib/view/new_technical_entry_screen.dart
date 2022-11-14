@@ -28,7 +28,7 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                HeadingText(text: "Technical"),
+                headingText(text: "Technical"),
                 SizedBox(
                   height: 75.h,
                 ),
