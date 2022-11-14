@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  var userId;
+  HomeScreen({super.key, required this.userId});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: "assets/images/selling_product.png",
                   height: 200,
                   onTap: () {
-                    ProductsScreen();
+                    ProductsScreen(userId: widget.userId);
                   },
                 ),
                 SizedBox(
@@ -47,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: "assets/images/buying_product.jpg",
                   height: 200,
                   onTap: () {
-                    DisplayProductsScreen();
+                    DisplayProductsScreen(userId: widget.userId);
                   },
                 ),
               ],

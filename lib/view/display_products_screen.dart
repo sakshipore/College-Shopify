@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayProductsScreen extends StatefulWidget {
-  const DisplayProductsScreen({super.key});
+  var userId;
+  DisplayProductsScreen({super.key, required this.userId});
 
   @override
   State<DisplayProductsScreen> createState() => _DisplayProductsScreenState();

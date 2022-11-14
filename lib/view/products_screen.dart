@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
+  var userId;
+  ProductsScreen({super.key, required this.userId});
 
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
@@ -37,8 +38,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
-                    // TODO : Aise navigate nahi hoga Navigator.push() likh
-                    NewBookEntryScreen();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewBookEntryScreen(userId: widget.userId),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(
@@ -49,7 +54,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
-                    NewStationaryEntryScreen();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewStationaryEntryScreen(userId: widget.userId),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(
@@ -60,7 +70,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
-                    NewTechnicalEntryScreen();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewTechnicalEntryScreen(userId: widget.userId),
+                      ),
+                    );
                   },
                 ),
               ],
