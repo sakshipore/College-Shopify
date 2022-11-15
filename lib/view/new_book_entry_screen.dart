@@ -35,7 +35,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
     });
     Map<String, dynamic>? userData =
         await MongoDatabase.fetchUserData(widget.userId);
-
+    // TODO : Error handling requried
     if (userData == null) return;
     List productIds = userData["product"];
     productIds.add(productId);
@@ -76,6 +76,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
       userId: widget.userId,
     );
     var result = await MongoDatabaseBook().insert(data.toJson());
+    // TODO : Proper error handling should be done
     log(result);
     setState(() {
       isLoading = false;
@@ -151,6 +152,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                       Button(
                         text: "ADD BOOK",
                         onTap: () {
+                          // TODO : No function is being called !!!!!!
                           Navigator.push(
                             context,
                             MaterialPageRoute(

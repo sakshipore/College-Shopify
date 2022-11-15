@@ -104,6 +104,7 @@ class _DisplayTechnicalProductScreenState
     );
   }
 
+// TODO : Convert it to statless widget and change the name
   Widget displayCard(Technical data) {
     return Card(
       color: Color(0xff2140B1),

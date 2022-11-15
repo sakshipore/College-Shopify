@@ -95,6 +95,7 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
     );
   }
 
+  // TODO : Make statlesswidget
   Widget displayCard(Book data) {
     return Card(
       color: Color(0xff2140B1),

@@ -99,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             await MongoDatabase.checkUser(mobNoController.text);
 
                         if (userData == null) {
+                          // TODO : Make widget for snackbar
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Color(0xff2140B1),

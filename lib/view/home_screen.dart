@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
+  // TODO : Define exact type of variable and make it final
   var userId;
   HomeScreen({super.key, required this.userId});
 
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ProductCard(
                   text: "Selling Product",
                   image: "assets/images/selling_product.png",
-                  height: 200,
+                  height: 200.h,
                   onTap: () {
                     Navigator.push(
                       context,

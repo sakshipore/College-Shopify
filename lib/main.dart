@@ -6,6 +6,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// TODO : DO NOT USER 'VAR' KEYWORD USER PROPER DATATYPES
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

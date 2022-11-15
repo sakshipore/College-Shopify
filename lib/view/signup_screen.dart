@@ -42,6 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       product: [],
     );
     var result = await MongoDatabase.insert(data);
+    // TODO : If any error occured in inserting data then show snackbar of Something went wrong
     log(result);
     setState(() {
       isLoading = false;
@@ -75,8 +76,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: isLoading
           ? Center(
               child: CircularProgressIndicator(
-              color: Color(0xff2140B1),
-            ),)
+                color: Color(0xff2140B1),
+              ),
+            )
           : SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
@@ -128,6 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             addressController.text,
                             mobNoController.text,
                           );
+                          // TODO : Only successful insertion of data should trigger this navigation
                           Navigator.push(
                             context,
                             MaterialPageRoute(

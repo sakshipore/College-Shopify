@@ -38,6 +38,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
     List productIds = userData["product"];
     productIds.add(productId);
     var result = await MongoDatabase.update(widget.userId, productIds);
+    // TODO  : Error handling
     log(result.toString());
     setState(() {
       isLoading = false;
@@ -70,6 +71,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
       userId: widget.userId,
     );
     var result = await MongoDatabaseStationary().insert(data.toJson());
+    // TODO  : Error handling
     log(result);
     setState(() {
       isLoading = false;

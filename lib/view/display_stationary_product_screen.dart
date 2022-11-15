@@ -97,6 +97,7 @@ class _DisplayStationaryProductState
     );
   }
 
+  // TODO : Convert it to statless widget and change the name
   Widget displayCard(Stationary data) {
     return Card(
       color: Color(0xff2140B1),
