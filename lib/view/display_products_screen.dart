@@ -38,7 +38,12 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
-                    DisplayBookProductScreen();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DisplayBookProductScreen(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(
@@ -49,7 +54,12 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
-                    DisplayStationaryProductScreen();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DisplayStationaryProductScreen(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(
@@ -60,7 +70,12 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
-                    DisplayTechnicalProductScreen();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DisplayTechnicalProductScreen(),
+                      ),
+                    );
                   },
                 ),
               ],

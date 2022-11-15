@@ -29,3 +29,14 @@ Text normalText({required String text}) {
     ),
   );
 }
+
+Text whiteText({required String text}) {
+  return Text(
+    text,
+    style: MyTextStyle.normalLatoFont.copyWith(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      color: Colors.white,
+    ),
+  );
+}

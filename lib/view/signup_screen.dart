@@ -76,66 +76,68 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ? Center(
               child: CircularProgressIndicator(
               color: Color(0xff2140B1),
-            ))
+            ),)
           : SafeArea(
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 50.h,
-                    ),
-                    headingText(text: "Sign Up"),
-                    SizedBox(
-                      height: 75.h,
-                    ),
-                    FormText(text: "First Name", controller: fnameController),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    FormText(text: "Last Name", controller: lnameController),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    FormText(text: "Address", controller: addressController),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    FormText(text: "Mobile No", controller: mobNoController),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 170.w),
-                        child: normalText(text: "Already have an account?"),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 50.h,
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Button(
-                      text: "SIGN UP",
-                      onTap: () async {
-                        await _insertData(
-                          fnameController.text,
-                          lnameController.text,
-                          addressController.text,
-                          mobNoController.text,
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomeScreen(userId: userId),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                      headingText(text: "Sign Up"),
+                      SizedBox(
+                        height: 75.h,
+                      ),
+                      FormText(text: "First Name", controller: fnameController),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      FormText(text: "Last Name", controller: lnameController),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      FormText(text: "Address", controller: addressController),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      FormText(text: "Mobile No", controller: mobNoController),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 170.w),
+                          child: normalText(text: "Already have an account?"),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Button(
+                        text: "SIGN UP",
+                        onTap: () async {
+                          await _insertData(
+                            fnameController.text,
+                            lnameController.text,
+                            addressController.text,
+                            mobNoController.text,
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(userId: userId),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

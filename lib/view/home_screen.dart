@@ -39,7 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: "assets/images/selling_product.png",
                   height: 200,
                   onTap: () {
-                    ProductsScreen(userId: widget.userId);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(userId: widget.userId),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(
@@ -50,7 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: "assets/images/buying_product.jpg",
                   height: 200,
                   onTap: () {
-                    DisplayProductsScreen(userId: widget.userId);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DisplayProductsScreen(userId: widget.userId),
+                      ),
+                    );
                   },
                 ),
               ],
