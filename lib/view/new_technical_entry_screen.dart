@@ -8,6 +8,7 @@ import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
+import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
@@ -48,15 +49,7 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Color(0xff2140B1),
-        content: Text(
-          "Updated ID: $productId",
-          style: MyTextStyle.normalLatoFont.copyWith(
-            fontSize: 12.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
+        content: SnackBarText(text: "Updated ID: $productId",),
       ),
     );
     _clearAll();
@@ -85,15 +78,7 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Color(0xff2140B1),
-        content: Text(
-          "Inserted ID: ${_id.$oid}",
-          style: MyTextStyle.normalLatoFont.copyWith(
-            fontSize: 12.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
+        content: SnackBarText(text: "Inserted ID: ${_id.$oid}"),
       ),
     );
     _clearAll();

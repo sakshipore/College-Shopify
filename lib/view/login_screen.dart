@@ -6,6 +6,7 @@ import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
+import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -99,18 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             await MongoDatabase.checkUser(mobNoController.text);
 
                         if (userData == null) {
-                          // TODO : Make widget for snackbar
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              backgroundColor: Color(0xff2140B1),
-                              content: Text(
-                                "User doesn't exist !",
-                                style: MyTextStyle.normalLatoFont.copyWith(
-                                  fontSize: 12.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
+                              content:
+                                  SnackBarText(text: "User doesn't exist !"),
                             ),
                           );
                           Navigator.push(
@@ -123,14 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           userId = userData['id'];
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              backgroundColor: Color(0xff2140B1),
-                              content: Text(
-                                "User exists: " + userId.toString(),
-                                style: MyTextStyle.normalLatoFont.copyWith(
-                                  fontSize: 12.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                ),
+                              content: SnackBarText(
+                                text: "User exists: " + userId.toString(),
                               ),
                             ),
                           );
