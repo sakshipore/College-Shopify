@@ -136,8 +136,15 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                       ),
                       Button(
                         text: "ADD BOOK",
-                        onTap: () {
-                          // TODO : No function is being called !!!!!!
+                        onTap: () async {
+                          await _insertData(
+                            nameController.text,
+                            authorController.text,
+                            costController.text,
+                            editionController.text,
+                            publicationController.text,
+                          );
+                          await _updateData(_id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

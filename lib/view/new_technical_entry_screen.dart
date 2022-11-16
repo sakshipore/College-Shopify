@@ -49,7 +49,9 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: SnackBarText(text: "Updated ID: $productId",),
+        content: SnackBarText(
+          text: "Updated ID: $productId",
+        ),
       ),
     );
     _clearAll();
@@ -146,11 +148,21 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
                       ),
                       Button(
                         text: "ADD TECHNICAL",
-                        onTap: () {
+                        onTap: () async {
+                          await _insertData(
+                            nameController.text,
+                            modelNoController.text,
+                            specificationController.text,
+                            billNoController.text,
+                            companyNameController.text,
+                            costController.text,
+                          );
+                          await _updateData(_id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomeScreen(userId: widget.userId),
+                              builder: (context) =>
+                                  HomeScreen(userId: widget.userId),
                             ),
                           );
                         },

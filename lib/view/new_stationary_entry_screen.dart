@@ -115,7 +115,12 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
                       ),
                       Button(
                         text: "ADD STATIONARY",
-                        onTap: () {
+                        onTap: () async {
+                          await _insertData(
+                            itemController.text,
+                            costController.text,
+                          );
+                          await _updateData(_id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
