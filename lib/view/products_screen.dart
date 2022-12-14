@@ -1,4 +1,3 @@
-import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/view/new_book_entry_screen.dart';
 import 'package:college_shopify/view/new_stationary_entry_screen.dart';
 import 'package:college_shopify/view/new_technical_entry_screen.dart';

@@ -1,4 +1,3 @@
-import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/view/signup_screen.dart';
