@@ -4,8 +4,8 @@ import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/db_helper/mongodb_book.dart';
 import 'package:college_shopify/model/books.dart';
 import 'package:college_shopify/view/display_data.dart';
+import 'package:college_shopify/widgets/display_card_book.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -59,8 +59,8 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                                   ),
                                 );
                               },
-                              child: displayCard(
-                                Book.fromJson(
+                              child: DisplayCardBook(
+                                data: Book.fromJson(
                                   snapshot.data[index],
                                 ),
                               ),
@@ -90,42 +90,6 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  // TODO : Make statlesswidget
-  Widget displayCard(Book data) {
-    return Card(
-      color: Color(0xff2140B1),
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            whiteText(text: "Product id: " + data.id.$oid),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Name of Book: " + data.name),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Author: " + data.author),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Edition: " + data.edition),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Publication: " + data.publication),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Cost: " + data.cost),
-          ],
         ),
       ),
     );

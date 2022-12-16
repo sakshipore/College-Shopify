@@ -99,12 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             await MongoDatabase.checkUser(mobNoController.text);
 
                         if (userData == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:
-                                  SnackBarText(text: "User doesn't exist !"),
-                            ),
-                          );
+                          showSnackBar(context, "User doesn't exist !");
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -113,13 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         } else {
                           userId = userData['id'];
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: SnackBarText(
-                                text: "User exists: " + userId.toString(),
-                              ),
-                            ),
-                          );
+                          showSnackBar(
+                              context, "User exists: " + userId.toString());
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

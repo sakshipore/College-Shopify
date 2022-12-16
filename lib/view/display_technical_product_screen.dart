@@ -4,7 +4,7 @@ import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/db_helper/mongodb_technical.dart';
 import 'package:college_shopify/model/technical.dart';
 import 'package:college_shopify/view/display_data.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
+import 'package:college_shopify/widgets/display_card_technical.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -68,8 +68,8 @@ class _DisplayTechnicalProductScreenState
                                   ),
                                 );
                               },
-                              child: displayCard(
-                                Technical.fromJson(
+                              child: DisplayCardTechnical(
+                                data: Technical.fromJson(
                                   snapshot.data[index],
                                 ),
                               ),
@@ -99,49 +99,6 @@ class _DisplayTechnicalProductScreenState
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-// TODO : Convert it to statless widget and change the name
-  Widget displayCard(Technical data) {
-    return Card(
-      color: Color(0xff2140B1),
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            whiteText(text: "Product id: " + data.id.$oid),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Name of Product: " + data.name),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Company Name: " + data.companyName),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Model no.: " + data.modelNo),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Specification: " + data.specification),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Bill no.: " + data.billNo),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Cost: " + data.cost),
-            SizedBox(
-              height: 5.h,
-            ),
-          ],
         ),
       ),
     );

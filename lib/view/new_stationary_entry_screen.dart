@@ -38,16 +38,15 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
     List productIds = userData["product"];
     productIds.add(productId);
     var result = await MongoDatabase.update(widget.userId, productIds);
-    // TODO  : Error handling
     log(result.toString());
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(text: "Updated ID: $productId"),
-      ),
-    );
+    if(result["Success"] == false) {
+      showSnackBar(context, result["Msg"]);
+    } else {
+      showSnackBar(context, "Updated ID: $productId");
+    }
     _clearAll();
   }
 
@@ -55,24 +54,24 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
     setState(() {
       isLoading = true;
     });
-    _id = M.ObjectId;
+    _id = M.ObjectId();
     final data = Stationary(
       id: _id,
       item: item,
       cost: cost,
       userId: widget.userId,
     );
-    var result = await MongoDatabaseStationary().insert(data.toJson());
-    // TODO  : Error handling
-    log(result);
+    Map<String, dynamic> result =
+        await MongoDatabaseStationary().insert(data.toJson());
+    log(result.toString());
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(text: "Inserted ID: ${_id.$oid}"),
-      ),
-    );
+    if (result["Success"] == true) {
+      showSnackBar(context, "Inserted ID: ${_id.$oid}");
+    } else {
+      showSnackBar(context, result["Msg"]);
+    }
     _clearAll();
   }
 

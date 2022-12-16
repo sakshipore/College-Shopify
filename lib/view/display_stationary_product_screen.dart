@@ -4,8 +4,8 @@ import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/db_helper/mongodb_stationary.dart';
 import 'package:college_shopify/model/stationary.dart';
 import 'package:college_shopify/view/display_data.dart';
+import 'package:college_shopify/widgets/display_card_stationary.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -61,8 +61,8 @@ class _DisplayStationaryProductState
                                   ),
                                 );
                               },
-                              child: displayCard(
-                                Stationary.fromJson(
+                              child: DisplayCardStationary(
+                                data: Stationary.fromJson(
                                   snapshot.data[index],
                                 ),
                               ),
@@ -92,33 +92,6 @@ class _DisplayStationaryProductState
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  // TODO : Convert it to statless widget and change the name
-  Widget displayCard(Stationary data) {
-    return Card(
-      color: Color(0xff2140B1),
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            whiteText(text: "Product id: " + data.id.$oid),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Name of Product: " + data.item),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Cost: " + data.cost),
-            SizedBox(
-              height: 5.h,
-            ),
-          ],
         ),
       ),
     );

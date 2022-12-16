@@ -46,13 +46,11 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(
-          text: "Updated ID: $productId",
-        ),
-      ),
-    );
+    if (result["Success"] == false) {
+      showSnackBar(context, result["Msg"]);
+    } else {
+      showSnackBar(context, "Updated ID: $productId");
+    }
     _clearAll();
   }
 
@@ -61,7 +59,7 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
     setState(() {
       isLoading = true;
     });
-    _id = M.ObjectId;
+    _id = M.ObjectId();
     final data = Technical(
       id: _id,
       name: name,
@@ -72,16 +70,18 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
       cost: cost,
       userId: widget.userId,
     );
-    var result = await MongoDatabaseTechnical().insert(data.toJson());
-    log(result);
+    Map<String, dynamic> result =
+        await MongoDatabaseTechnical().insert(data.toJson());
+    log(result.toString());
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(text: "Inserted ID: ${_id.$oid}"),
-      ),
-    );
+    if (result["Success"] == true) {
+      showSnackBar(context, "Inserted ID: ${_id.$oid}");
+    } else {
+      showSnackBar(context, result["Msg"]);
+    }
+
     _clearAll();
   }
 

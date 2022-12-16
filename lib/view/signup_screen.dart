@@ -26,13 +26,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController mobNoController = TextEditingController();
   bool isLoading = false;
   var userId;
+  bool inserted = false;
 
-  Future<void> _insertData(
+  Future<bool> _insertData(
       String fname, String lname, String address, String mobNo) async {
     setState(() {
       isLoading = true;
     });
-    userId = M.ObjectId;
+    userId = M.ObjectId();
     final data = MongoDBModel(
       id: userId,
       address: address,
@@ -41,18 +42,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       mobNo: mobNo,
       product: [],
     );
-    var result = await MongoDatabase.insert(data);
-    // TODO : If any error occured in inserting data then show snackbar of Something went wrong
-    log(result);
+    Map<String, dynamic> result = await MongoDatabase.insert(data);
+    log(result.toString());
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(text: "Inserted ID: ${userId.$oid}"),
-      ),
-    );
+
+    if (result["Success"] == true) {
+      inserted = true;
+      showSnackBar(context, "Inserted ID: ${userId.$oid}");
+    } else {
+      inserted = false;
+      showSnackBar(context, result["Msg"]);
+    }
+
     _clearAll();
+    return inserted;
   }
 
   void _clearAll() {
@@ -122,13 +127,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             addressController.text,
                             mobNoController.text,
                           );
-                          // TODO : Only successful insertion of data should trigger this navigation
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeScreen(userId: userId),
-                            ),
-                          );
+                          if (inserted == true) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    HomeScreen(userId: userId),
+                              ),
+                            );
+                          } else {
+                            normalText(text: "Error Occurred");
+                          }
                         },
                       ),
                     ],

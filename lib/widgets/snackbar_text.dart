@@ -2,13 +2,9 @@ import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SnackBarText extends StatelessWidget {
-  String text;
-  SnackBarText({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return SnackBar(
+showSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
       backgroundColor: Color(0xff2140B1),
       content: Text(
         text,
@@ -18,6 +14,6 @@ class SnackBarText extends StatelessWidget {
           fontWeight: FontWeight.w300,
         ),
       ),
-    );
-  }
+    ),
+  );
 }

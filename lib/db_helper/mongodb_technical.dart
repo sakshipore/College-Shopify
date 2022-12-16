@@ -4,7 +4,6 @@ import 'package:college_shopify/db_helper/constants.dart';
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
-
 class MongoDatabaseTechnical {
   static late Db db;
   static late DbCollection technicalCollection;
@@ -24,17 +23,26 @@ class MongoDatabaseTechnical {
     }
   }
 
-  Future<String> insert(Map<String, dynamic> data) async {
+  Future<Map<String, dynamic>> insert(Map<String, dynamic> data) async {
     try {
       technicalCollection = db.collection(TECHNICAL_COLL);
       var result = await technicalCollection.insertOne(data);
       if (result.isSuccess) {
-        return "Data inserted";
+        return {
+          "Success": true,
+          "Msg": "Data inserted",
+        };
       } else {
-        return "Something went wrong";
+        return {
+          "Success": true,
+          "Msg": "Something went wrong",
+        };
       }
     } catch (e) {
-      return e.toString();
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
     }
   }
 

@@ -35,7 +35,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
     });
     Map<String, dynamic>? userData =
         await MongoDatabase.fetchUserData(widget.userId);
-    // TODO : Error handling requried
+  
     if (userData == null) return;
     List productIds = userData["product"];
     productIds.add(productId);
@@ -44,11 +44,11 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(text: "Updated ID: $productId"),
-      ),
-    );
+    if (result["Success"] == false) {
+      showSnackBar(context, result["Msg"]);
+    } else {
+      showSnackBar(context, "Updated ID: $productId");
+    }
     _clearAll();
   }
 
@@ -57,7 +57,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
     setState(() {
       isLoading = true;
     });
-    _id = M.ObjectId;
+    _id = M.ObjectId();
     final data = Book(
       id: _id,
       name: name,
@@ -67,17 +67,18 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
       publication: publication,
       userId: widget.userId,
     );
-    var result = await MongoDatabaseBook().insert(data.toJson());
-    // TODO : Proper error handling should be done
-    log(result);
+    Map<String, dynamic> result =
+        await MongoDatabaseBook().insert(data.toJson());
+    log(result.toString());
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: SnackBarText(text: "Inserted ID: ${_id.$oid}"),
-      ),
-    );
+    if (result["Success"] == true) {
+      showSnackBar(context, "Inserted ID: ${_id.$oid}");
+    } else {
+      showSnackBar(context, result["Msg"]);
+    }
+    _clearAll();
   }
 
   void _clearAll() {

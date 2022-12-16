@@ -4,7 +4,6 @@ import 'package:college_shopify/db_helper/constants.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
-
 class MongoDatabase {
   static late Db db;
   static late DbCollection usersCollection;
@@ -25,17 +24,26 @@ class MongoDatabase {
     await usersCollection.remove(where.id(user.id));
   }
 
-  static Future<String> insert(MongoDBModel data) async {
+  static Future<Map<String, dynamic>> insert(MongoDBModel data) async {
     try {
       usersCollection = db.collection(COLL_NAME);
       var result = await usersCollection.insertOne(data.toJson());
       if (result.isSuccess) {
-        return "Data inserted";
+        return {
+          "Success": true,
+          "Msg": "Data inserted",
+        };
       } else {
-        return "Something went wrong";
+        return {
+          "Success": false,
+          "Msg": "Something went wrong",
+        };
       }
     } catch (e) {
-      return e.toString();
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
     }
   }
 
@@ -69,8 +77,15 @@ class MongoDatabase {
 
   static Future<Map<String, dynamic>> update(
       var userId, List productIds) async {
-    var result = await usersCollection.update(
-        where.eq('id', userId), modify.set('product', productIds));
-    return result;
+    try {
+      var result = await usersCollection.update(
+          where.eq('id', userId), modify.set('product', productIds));
+      return result;
+    } catch (e) {
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
+    }
   }
 }
