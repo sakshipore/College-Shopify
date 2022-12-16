@@ -37,6 +37,11 @@ class DisplayCardBook extends StatelessWidget {
               height: 5.h,
             ),
             whiteText(text: "Cost: " + data.cost),
+            Container(
+              height: 50.h,
+              width: 50.h,
+              child: data.productImage!="" ? Image.network(data.productImage) : Text("default"),
+            ),
           ],
         ),
       ),

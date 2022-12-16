@@ -1,13 +1,17 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/db_helper/mongodb_book.dart';
 import 'package:college_shopify/model/books.dart';
+import 'package:college_shopify/utils/pick_image.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
+import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
@@ -28,6 +32,8 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
   TextEditingController publicationController = TextEditingController();
   bool isLoading = false;
   var _id;
+  String productImage = "";
+  File? image;
 
   Future<void> _updateData(var productId) async {
     setState(() {
@@ -35,7 +41,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
     });
     Map<String, dynamic>? userData =
         await MongoDatabase.fetchUserData(widget.userId);
-  
+
     if (userData == null) return;
     List productIds = userData["product"];
     productIds.add(productId);
@@ -53,7 +59,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
   }
 
   Future<void> _insertData(String name, String author, String cost,
-      String edition, String publication) async {
+      String edition, String publication, String image) async {
     setState(() {
       isLoading = true;
     });
@@ -66,6 +72,7 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
       edition: edition,
       publication: publication,
       userId: widget.userId,
+      productImage: image,
     );
     Map<String, dynamic> result =
         await MongoDatabaseBook().insert(data.toJson());
@@ -112,39 +119,93 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                       SizedBox(
                         height: 75.h,
                       ),
-                      FormText(text: "Book Name", controller: nameController),
-                      SizedBox(
-                        height: 10.h,
+                      FormText(
+                        text: "Book Name",
+                        controller: nameController,
                       ),
-                      FormText(text: "Author", controller: authorController),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      FormText(text: "Edition", controller: editionController),
                       SizedBox(
                         height: 10.h,
                       ),
                       FormText(
-                          text: "Publication",
-                          controller: publicationController),
+                        text: "Author",
+                        controller: authorController,
+                      ),
                       SizedBox(
                         height: 10.h,
                       ),
-                      FormText(text: "Cost", controller: costController),
+                      FormText(
+                        text: "Edition",
+                        controller: editionController,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      FormText(
+                        text: "Publication",
+                        controller: publicationController,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      FormText(
+                        text: "Cost",
+                        controller: costController,
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          File? temp = await pickImage();
+                          setState(() {
+                            image = temp;
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            height: 100.h,
+                            width: 100.w,
+                            decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.r),
+                              child: image == null
+                                  ? Center(child: normalText(text: "Add Image"))
+                                  : Image.file(
+                                      File(image!.path),
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 30.h,
                       ),
                       Button(
                         text: "ADD BOOK",
                         onTap: () async {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          log("*************picking done uploading");
+                          productImage = await uploadProductImage(
+                              image, nameController.text);
+
                           await _insertData(
                             nameController.text,
                             authorController.text,
                             costController.text,
                             editionController.text,
                             publicationController.text,
+                            productImage,
                           );
                           await _updateData(_id);
+                          setState(() {
+                            isLoading = false;
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(

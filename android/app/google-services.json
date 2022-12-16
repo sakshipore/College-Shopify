@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "446501166281",
+    "project_id": "college-shopify",
+    "storage_bucket": "college-shopify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446501166281:android:f37f0adc20c7aceed28118",
+        "android_client_info": {
+          "package_name": "com.example.college_shopify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446501166281-vd8at29c1uk7vfdonefmgh2vrgdsij59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.college_shopify",
+            "certificate_hash": "e66b5a8715e430d101d44674abc65cf49613ac3a"
+          }
+        },
+        {
+          "client_id": "446501166281-rc9890228e08ot12hdod8okrecfvbhck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFYHnLVoMAoNDZopt5I3ceKp3idzRWOSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446501166281-rc9890228e08ot12hdod8okrecfvbhck.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
