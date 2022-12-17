@@ -16,6 +16,7 @@ class Technical {
   String companyName;
   String cost;
   ObjectId userId;
+  String productImage;
 
   Technical({
     required this.id,
@@ -26,6 +27,7 @@ class Technical {
     required this.companyName,
     required this.cost,
     required this.userId,
+    required this.productImage,
   });
 
   factory Technical.fromJson(Map<String, dynamic> json) => Technical(
@@ -37,6 +39,7 @@ class Technical {
         companyName: json["companyName"],
         cost: json["cost"],
         userId: json["userId"],
+        productImage: json["productImage"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,5 +51,6 @@ class Technical {
         "companyName": companyName,
         "cost": cost,
         "userId": userId,
+        "productImage":productImage,
       };
 }

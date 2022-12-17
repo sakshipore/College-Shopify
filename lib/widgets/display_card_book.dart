@@ -12,35 +12,50 @@ class DisplayCardBook extends StatelessWidget {
     return Card(
       color: Color(0xff2140B1),
       child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: EdgeInsets.all(2),
+        child: Row(
           children: [
-            whiteText(text: "Product id: " + data.id.$oid),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Name of Book: " + data.name),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Author: " + data.author),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Edition: " + data.edition),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Publication: " + data.publication),
-            SizedBox(
-              height: 5.h,
-            ),
-            whiteText(text: "Cost: " + data.cost),
             Container(
-              height: 50.h,
-              width: 50.h,
-              child: data.productImage!="" ? Image.network(data.productImage) : Text("default"),
+              height: 100.h,
+              width: 100.w,
+              child: data.productImage != ""
+                  ? Image.network(
+                      data.productImage,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      "assets/images/book_product.jpg",
+                      fit: BoxFit.cover,
+                    ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // whiteText(text: "Product id: " + data.id.$oid),
+                  // SizedBox(
+                  //   height: 5.h,
+                  // ),
+                  whiteText(text: "Name of Book: " + data.name),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  whiteText(text: "Author: " + data.author),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  whiteText(text: "Edition: " + data.edition),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  whiteText(text: "Publication: " + data.publication),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  whiteText(text: "Cost: " + data.cost),
+                ],
+              ),
             ),
           ],
         ),

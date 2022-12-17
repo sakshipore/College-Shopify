@@ -12,12 +12,14 @@ class Stationary {
   String item;
   String cost;
   ObjectId userId;
+  String productImage;
 
   Stationary({
     required this.id,
     required this.item,
     required this.cost,
     required this.userId,
+    required this.productImage,
   });
 
   factory Stationary.fromJson(Map<String, dynamic> json) => Stationary(
@@ -25,6 +27,7 @@ class Stationary {
         item: json["item"],
         cost: json["cost"],
         userId: json["userId"],
+        productImage: json["productImage"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,5 +35,6 @@ class Stationary {
         "item": item,
         "cost": cost,
         "userId": userId,
+        "productImage": productImage,
       };
 }

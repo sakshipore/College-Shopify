@@ -11,7 +11,6 @@ import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;

@@ -1,12 +1,15 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/db_helper/mongodb_stationary.dart';
 import 'package:college_shopify/model/stationary.dart';
+import 'package:college_shopify/utils/pick_image.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
+import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +29,8 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
   TextEditingController costController = TextEditingController();
   bool isLoading = false;
   var _id;
+  String productImage = "";
+  File? image;
 
   Future<void> _updateData(var productId) async {
     setState(() {
@@ -42,7 +47,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
     setState(() {
       isLoading = false;
     });
-    if(result["Success"] == false) {
+    if (result["Success"] == false) {
       showSnackBar(context, result["Msg"]);
     } else {
       showSnackBar(context, "Updated ID: $productId");
@@ -50,7 +55,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
     _clearAll();
   }
 
-  Future<void> _insertData(String item, String cost) async {
+  Future<void> _insertData(String item, String cost, String image) async {
     setState(() {
       isLoading = true;
     });
@@ -60,6 +65,7 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
       item: item,
       cost: cost,
       userId: widget.userId,
+      productImage: image,
     );
     Map<String, dynamic> result =
         await MongoDatabaseStationary().insert(data.toJson());
@@ -109,16 +115,59 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
                       ),
                       FormText(text: "Cost", controller: costController),
                       SizedBox(
+                        height: 20.h,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          File? temp = await pickImage();
+                          setState(() {
+                            image = temp;
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            height: 100.h,
+                            width: 100.w,
+                            decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.r),
+                              child: image == null
+                                  ? Center(
+                                      child: normalText(
+                                        text: "Add Image",
+                                      ),
+                                    )
+                                  : Image.file(
+                                      File(image!.path),
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
                         height: 30.h,
                       ),
                       Button(
                         text: "ADD STATIONARY",
                         onTap: () async {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          productImage = await uploadProductImage(
+                              image, itemController.text);
                           await _insertData(
                             itemController.text,
                             costController.text,
+                            productImage,
                           );
                           await _updateData(_id);
+                          setState(() {
+                            isLoading = false;
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
