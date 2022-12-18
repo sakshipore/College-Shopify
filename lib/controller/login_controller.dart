@@ -18,12 +18,13 @@ class LoginController extends GetxController {
   void onInit() {
     connectToDB();
     super.onInit();
-    isLoading = false;
   }
 
   void connectToDB() async {
     MongoDatabase db = MongoDatabase();
     await db.connect();
+    isLoading = false;
+    update();
   }
 
   Future<Map<String, dynamic>?> checkUser(String mobNo) async {

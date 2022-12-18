@@ -78,28 +78,26 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 50.h,
                       ),
-                      GetX<LoginController>(builder: (controller) {
-                        return Button(
-                          text: "LOGIN",
-                          onTap: () async {
-                            var userData = await controller
-                                .checkUser(mobNoController.text);
-                            if (userData == null) {
-                              showSnackBar(
-                                  "Error occurred", "User doesn't exist !");
-                              Get.to(
-                                SignUpScreen(),
-                              );
-                            } else {
-                              userId = userData['id'];
-                              showSnackBar("User exists: ", userId.toString());
-                              Get.to(
-                                HomeScreen(userId: userId),
-                              );
-                            }
-                          },
-                        );
-                      }),
+                      Button(
+                        text: "LOGIN",
+                        onTap: () async {
+                          var userData =
+                              await controller.checkUser(mobNoController.text);
+                          if (userData == null) {
+                            showSnackBar(
+                                "Error occurred", "User doesn't exist !");
+                            Get.to(
+                              SignUpScreen(),
+                            );
+                          } else {
+                            userId = userData['id'];
+                            showSnackBar("User exists: ", userId.toString());
+                            Get.to(
+                              HomeScreen(userId: userId),
+                            );
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
