@@ -21,6 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController fnameController = TextEditingController();
   TextEditingController lnameController = TextEditingController();
   TextEditingController mobNoController = TextEditingController();
+  final userController = Get.put(LoginController());
   bool isLoading = false;
   var userId;
   bool inserted = false;
@@ -115,29 +116,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: 30.h,
                 ),
-                Button(
-                  text: "SIGN UP",
-                  onTap: () async {
-                    inserted = await LoginController.instance.insertData(
-                      fnameController.text,
-                      lnameController.text,
-                      addressController.text,
-                      mobNoController.text,
-                    );
-                    // await _insertData(
-                    //   fnameController.text,
-                    //   lnameController.text,
-                    //   addressController.text,
-                    //   mobNoController.text,
-                    // );
-                    if (inserted == true) {
-                      Get.to(HomeScreen(userId: userId));
-                    } else {
-                      // normalText(text: "Error Occurred");
-                      showSnackBar("Error occurred", "Kindly insert again");
-                    }
-                  },
-                ),
+                GetX<LoginController>(builder: (controller) {
+                  return Button(
+                    text: "SIGN UP",
+                    onTap: () async {
+                      inserted = await controller.insertData(
+                        fnameController.text,
+                        lnameController.text,
+                        addressController.text,
+                        mobNoController.text,
+                      );
+                      // await _insertData(
+                      //   fnameController.text,
+                      //   lnameController.text,
+                      //   addressController.text,
+                      //   mobNoController.text,
+                      // );
+                      if (inserted == true) {
+                        Get.to(HomeScreen(userId: userId));
+                      } else {
+                        // normalText(text: "Error Occurred");
+                        showSnackBar("Error occurred", "Kindly insert again");
+                      }
+                    },
+                  );
+                }),
               ],
             ),
           ),

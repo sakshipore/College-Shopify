@@ -7,16 +7,18 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class LoginController extends GetxController {
-  Map<String, dynamic> user = Map<String, dynamic>().obs;
-  static LoginController instance = Get.find();
+  final Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
+  // static LoginController instance = Get.find();
   // static late DbCollection usersCollection;
   var userId;
   bool inserted = false;
+  bool isLoading = true;
 
   @override
   void onInit() {
     connectToDB();
     super.onInit();
+    isLoading = false;
   }
 
   void connectToDB() async {
