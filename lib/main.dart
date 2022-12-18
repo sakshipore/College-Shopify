@@ -1,11 +1,15 @@
+import 'package:college_shopify/controller/login_controller.dart';
+import 'package:college_shopify/router/routes.dart';
+import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/view/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp().then((value)=>Get.put(LoginController()));
   runApp(const MyApp());
 }
 
@@ -18,9 +22,10 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 840),
       minTextAdapt: true,
       builder: (context, child) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LoginScreen(),
+          initialRoute: RoutesNames.loginScreen,
+          getPages: AppRoutes.routes,
         );
       },
     );

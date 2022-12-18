@@ -53,16 +53,16 @@ class MongoDatabase {
     return arrData;
   }
 
-  static Future<Map<String, dynamic>?> checkUser(String mobNo) async {
-    Map<String, dynamic>? userData;
-    userData = await usersCollection.findOne({'mobNo': mobNo});
-    if (userData == null) {
-      return null;
-    } else {
-      log(userData.toString());
-      return userData;
-    }
-  }
+  // static Future<Map<String, dynamic>?> checkUser(String mobNo) async {
+  //   Map<String, dynamic>? userData;
+  //   userData = await usersCollection.findOne({'mobNo': mobNo});
+  //   if (userData == null) {
+  //     return null;
+  //   } else {
+  //     log(userData.toString());
+  //     return userData;
+  //   }
+  // }
 
   static Future<Map<String, dynamic>?> fetchUserData(var userId) async {
     Map<String, dynamic>? userData;

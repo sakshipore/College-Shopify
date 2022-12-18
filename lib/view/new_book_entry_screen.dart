@@ -50,9 +50,9 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
       isLoading = false;
     });
     if (result["Success"] == false) {
-      showSnackBar(context, result["Msg"]);
+      // showSnackBar(context, result["Msg"]);
     } else {
-      showSnackBar(context, "Updated ID: $productId");
+      // showSnackBar(context, "Updated ID: $productId");
     }
     _clearAll();
   }
@@ -80,9 +80,9 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
       isLoading = false;
     });
     if (result["Success"] == true) {
-      showSnackBar(context, "Inserted ID: ${_id.$oid}");
+      // showSnackBar(context, "Inserted ID: ${_id.$oid}");
     } else {
-      showSnackBar(context, result["Msg"]);
+      // showSnackBar(context, result["Msg"]);
     }
     _clearAll();
   }
