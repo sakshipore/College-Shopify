@@ -4,20 +4,19 @@ import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:get/get.dart';
-import 'package:mongo_dart/mongo_dart.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class LoginController extends GetxController {
   Map<String, dynamic> user = Map<String, dynamic>().obs;
   static LoginController instance = Get.find();
-  static late DbCollection usersCollection;
+  // static late DbCollection usersCollection;
   var userId;
   bool inserted = false;
 
   @override
   void onInit() {
-    super.onInit();
     connectToDB();
+    super.onInit();
   }
 
   void connectToDB() async {
@@ -27,7 +26,7 @@ class LoginController extends GetxController {
 
   Future<Map<String, dynamic>?> checkUser(String mobNo) async {
     Map<String, dynamic>? userData;
-    userData = await usersCollection.findOne({'mobNo': mobNo});
+    userData = await MongoDatabase.usersCollection.findOne({'mobNo': mobNo});
     if (userData == null) {
       return null;
     } else {
@@ -38,7 +37,6 @@ class LoginController extends GetxController {
 
   Future<bool> insertData(
       String fname, String lname, String address, String mobNo) async {
-    
     userId = M.ObjectId();
     final data = MongoDBModel(
       id: userId,
@@ -50,7 +48,6 @@ class LoginController extends GetxController {
     );
     Map<String, dynamic> result = await MongoDatabase.insert(data);
     log(result.toString());
-    
 
     if (result["Success"] == true) {
       inserted = true;
