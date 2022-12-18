@@ -22,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController lnameController = TextEditingController();
   TextEditingController mobNoController = TextEditingController();
   final userController = Get.put(LoginController());
-  bool isLoading = false;
+  // bool isLoading = false;
   var userId;
   bool inserted = false;
 
@@ -67,85 +67,92 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // body: isLoading
-      //     ? Center(
-      //         child: CircularProgressIndicator(
-      //           color: Color(0xff2140B1),
-      //         ),
-      //       )
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 50.h,
+    return GetBuilder<LoginController>(builder: (controller) {
+      return Scaffold(
+        body: controller.isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xff2140B1),
                 ),
-                headingText(text: "Sign Up"),
-                SizedBox(
-                  height: 75.h,
-                ),
-                FormText(text: "First Name", controller: fnameController),
-                SizedBox(
-                  height: 10.h,
-                ),
-                FormText(text: "Last Name", controller: lnameController),
-                SizedBox(
-                  height: 10.h,
-                ),
-                FormText(text: "Address", controller: addressController),
-                SizedBox(
-                  height: 10.h,
-                ),
-                FormText(text: "Mobile No", controller: mobNoController),
-                SizedBox(
-                  height: 16.h,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
+              )
+            : SafeArea(
+                child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 170.w),
-                    child: normalText(text: "Already have an account?"),
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 50.h,
+                        ),
+                        headingText(text: "Sign Up"),
+                        SizedBox(
+                          height: 75.h,
+                        ),
+                        FormText(
+                            text: "First Name", controller: fnameController),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        FormText(
+                            text: "Last Name", controller: lnameController),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        FormText(
+                            text: "Address", controller: addressController),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        FormText(
+                            text: "Mobile No", controller: mobNoController),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 170.w),
+                            child: normalText(text: "Already have an account?"),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Button(
+                          text: "SIGN UP",
+                          onTap: () async {
+                            inserted = await controller.insertData(
+                              fnameController.text,
+                              lnameController.text,
+                              addressController.text,
+                              mobNoController.text,
+                            );
+                            // await _insertData(
+                            //   fnameController.text,
+                            //   lnameController.text,
+                            //   addressController.text,
+                            //   mobNoController.text,
+                            // );
+                            if (inserted == true) {
+                              Get.to(
+                                () => HomeScreen(userId: userId),
+                              );
+                            } else {
+                              // normalText(text: "Error Occurred");
+                              showSnackBar(
+                                  "Error occurred", "Kindly insert again");
+                            }
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                GetX<LoginController>(builder: (controller) {
-                  return Button(
-                    text: "SIGN UP",
-                    onTap: () async {
-                      inserted = await controller.insertData(
-                        fnameController.text,
-                        lnameController.text,
-                        addressController.text,
-                        mobNoController.text,
-                      );
-                      // await _insertData(
-                      //   fnameController.text,
-                      //   lnameController.text,
-                      //   addressController.text,
-                      //   mobNoController.text,
-                      // );
-                      if (inserted == true) {
-                        Get.to(HomeScreen(userId: userId));
-                      } else {
-                        // normalText(text: "Error Occurred");
-                        showSnackBar("Error occurred", "Kindly insert again");
-                      }
-                    },
-                  );
-                }),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+              ),
+      );
+    });
   }
 }
