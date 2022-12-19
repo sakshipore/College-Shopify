@@ -3,10 +3,7 @@ import 'dart:developer';
 import 'package:college_shopify/constants.dart/text_style.dart';
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
-import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/display_card_data.dart';
-import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
