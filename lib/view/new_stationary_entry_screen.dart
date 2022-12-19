@@ -157,8 +157,8 @@ class _NewStationaryEntryScreenState extends State<NewStationaryEntryScreen> {
                           setState(() {
                             isLoading = true;
                           });
-                          productImage = await uploadProductImage(
-                              image, itemController.text);
+                          // productImage = await uploadProductImage(
+                          //     image, itemController.text);
                           await _insertData(
                             itemController.text,
                             costController.text,

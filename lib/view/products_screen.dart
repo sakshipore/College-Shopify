@@ -5,16 +5,12 @@ import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class ProductsScreen extends StatefulWidget {
+class ProductsScreen extends StatelessWidget {
   var userId;
   ProductsScreen({super.key, required this.userId});
 
-  @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
-}
-
-class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +33,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewBookEntryScreen(userId: widget.userId),
-                      ),
+                    Get.to(
+                      () => NewBookEntryScreen(userId: userId),
                     );
                   },
                 ),
@@ -53,11 +46,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewStationaryEntryScreen(userId: widget.userId),
-                      ),
+                    Get.to(
+                      () => NewStationaryEntryScreen(userId: userId),
                     );
                   },
                 ),
@@ -69,11 +59,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewTechnicalEntryScreen(userId: widget.userId),
-                      ),
+                    Get.to(
+                      () => NewTechnicalEntryScreen(userId: userId),
                     );
                   },
                 ),

@@ -14,8 +14,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   TextEditingController mobNoController = TextEditingController();
-  final userController = Get.put(LoginController());
-  // bool isLoading = true;
+  // final userController = Get.put(LoginController());
   var userId;
 
   @override
@@ -67,12 +66,6 @@ class LoginScreen extends StatelessWidget {
                             Get.to(
                               () => SignUpScreen(),
                             );
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => SignUpScreen(),
-                            //   ),
-                            // );
                           },
                           child: Padding(
                             padding: EdgeInsets.only(left: 175.w),

@@ -5,16 +5,12 @@ import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class DisplayProductsScreen extends StatefulWidget {
+class DisplayProductsScreen extends StatelessWidget {
   var userId;
   DisplayProductsScreen({super.key, required this.userId});
 
-  @override
-  State<DisplayProductsScreen> createState() => _DisplayProductsScreenState();
-}
-
-class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +33,8 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayBookProductScreen(),
-                      ),
+                    Get.to(
+                      () => DisplayBookProductScreen(),
                     );
                   },
                 ),
@@ -53,11 +46,8 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayStationaryProductScreen(),
-                      ),
+                    Get.to(
+                      () => DisplayStationaryProductScreen(),
                     );
                   },
                 ),
@@ -69,11 +59,8 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayTechnicalProductScreen(),
-                      ),
+                    Get.to(
+                      () => DisplayTechnicalProductScreen(),
                     );
                   },
                 ),

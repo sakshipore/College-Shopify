@@ -191,8 +191,8 @@ class _NewTechnicalEntryScreenState extends State<NewTechnicalEntryScreen> {
                           setState(() {
                             isLoading = true;
                           });
-                          productImage = await uploadProductImage(
-                              image, nameController.text);
+                          // productImage = await uploadProductImage(
+                          //     image, nameController.text);
                           await _insertData(
                             nameController.text,
                             modelNoController.text,

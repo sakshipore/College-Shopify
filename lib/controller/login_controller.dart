@@ -8,8 +8,7 @@ import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class LoginController extends GetxController {
   final Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
-  // static LoginController instance = Get.find();
-  // static late DbCollection usersCollection;
+
   var userId;
   bool inserted = false;
   bool isLoading = true;

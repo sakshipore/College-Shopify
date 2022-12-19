@@ -4,18 +4,11 @@ import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  // TODO : Define exact type of variable and make it final
+class HomeScreen extends StatelessWidget {
   var userId;
   HomeScreen({super.key, required this.userId});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: "assets/images/selling_product.png",
                   height: 200.h,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ProductsScreen(userId: widget.userId),
-                      ),
+                    Get.to(
+                      () => ProductsScreen(userId: userId),
                     );
                   },
                 ),
@@ -56,12 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: "assets/images/buying_product.jpg",
                   height: 200,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            DisplayProductsScreen(userId: widget.userId),
-                      ),
+                    Get.to(
+                      () => DisplayProductsScreen(userId: userId),
                     );
                   },
                 ),
