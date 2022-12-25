@@ -1,105 +1,20 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:college_shopify/controller/new_book_entry_controller.dart';
-import 'package:college_shopify/controller/new_entry_controller.dart';
-import 'package:college_shopify/db_helper/mongodb.dart';
-import 'package:college_shopify/db_helper/mongodb_book.dart';
-import 'package:college_shopify/model/books.dart';
-import 'package:college_shopify/utils/pick_image.dart';
-import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
-import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class NewBookEntryScreen extends StatefulWidget {
+class NewBookEntryScreen extends StatelessWidget {
   var userId;
   NewBookEntryScreen({super.key, required this.userId});
 
-  @override
-  State<NewBookEntryScreen> createState() => _NewBookEntryScreenState();
-}
-
-class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
   final NewBookEntryController bookEntryController =
       Get.put(NewBookEntryController());
-  final NewEntryController entryController = Get.put(NewEntryController());
-  TextEditingController nameController = TextEditingController();
-  TextEditingController authorController = TextEditingController();
-  TextEditingController costController = TextEditingController();
-  TextEditingController editionController = TextEditingController();
-  TextEditingController publicationController = TextEditingController();
-
-  // bool isLoading = false;
-  var _id;
-  String productImage = "";
-  File? image;
-
-  // Future<void> _updateData(var productId) async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   Map<String, dynamic>? userData =
-  //       await MongoDatabase.fetchUserData(widget.userId);
-
-  //   if (userData == null) return;
-  //   List productIds = userData["product"];
-  //   productIds.add(productId);
-  //   var result = await MongoDatabase.update(widget.userId, productIds);
-  //   log(result.toString());
-  //   setState(() {
-  //     isLoading = false;
-  //   });
-  //   if (result["Success"] == false) {
-  //     // showSnackBar(context, result["Msg"]);
-  //   } else {
-  //     // showSnackBar(context, "Updated ID: $productId");
-  //   }
-  //   _clearAll();
-  // }
-
-  // Future<void> _insertData(String name, String author, String cost,
-  //     String edition, String publication, String image) async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   _id = M.ObjectId();
-  //   final data = Book(
-  //     id: _id,
-  //     name: name,
-  //     author: author,
-  //     cost: cost,
-  //     edition: edition,
-  //     publication: publication,
-  //     userId: widget.userId,
-  //     productImage: image,
-  //   );
-  //   Map<String, dynamic> result =
-  //       await MongoDatabaseBook().insert(data.toJson());
-  //   log(result.toString());
-  //   setState(() {
-  //     isLoading = false;
-  //   });
-  //   if (result["Success"] == true) {
-  //     // showSnackBar(context, "Inserted ID: ${_id.$oid}");
-  //   } else {
-  //     // showSnackBar(context, result["Msg"]);
-  //   }
-  //   _clearAll();
-  // }
-
-  void _clearAll() {
-    nameController.text = "";
-    authorController.text = "";
-    costController.text = "";
-    editionController.text = "";
-    publicationController.text = "";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,45 +43,42 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                           ),
                           FormText(
                             text: "Book Name",
-                            controller: nameController,
+                            controller: controller.nameController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
                             text: "Author",
-                            controller: authorController,
+                            controller: controller.authorController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
                             text: "Edition",
-                            controller: editionController,
+                            controller: controller.editionController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
                             text: "Publication",
-                            controller: publicationController,
+                            controller: controller.publicationController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
                             text: "Cost",
-                            controller: costController,
+                            controller: controller.costController,
                           ),
                           SizedBox(
                             height: 20.h,
                           ),
                           InkWell(
                             onTap: () async {
-                              File? temp = await pickImage();
-                              setState(() {
-                                image = temp;
-                              });
+                              await controller.selectImage();
                             },
                             child: Center(
                               child: Container(
@@ -178,11 +90,11 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.r),
-                                  child: image == null
+                                  child: controller.image == null
                                       ? Center(
                                           child: normalText(text: "Add Image"))
                                       : Image.file(
-                                          File(image!.path),
+                                          File(controller.image!.path),
                                           fit: BoxFit.cover,
                                         ),
                                 ),
@@ -192,49 +104,10 @@ class _NewBookEntryScreenState extends State<NewBookEntryScreen> {
                           SizedBox(
                             height: 30.h,
                           ),
-                          GetBuilder<NewEntryController>(
-                            builder: (newEntryController) {
-                              return Button(
-                                text: "ADD BOOK",
-                                onTap: () async {
-                                  controller.isLoading = true;
-                                  // setState(() {
-                                  //   isLoading = true;
-                                  // });
-                                  log("*************picking done uploading");
-                                  productImage = await newEntryController
-                                      .uploadProductImage(
-                                          image, nameController.text);
-
-                                  var newId = await controller.insertData(
-                                    nameController.text,
-                                    authorController.text,
-                                    costController.text,
-                                    editionController.text,
-                                    publicationController.text,
-                                    productImage,
-                                    widget.userId,
-                                  );
-                                  _clearAll();
-                                  await newEntryController.updateData(
-                                      newId, widget.userId);
-                                  _clearAll();
-                                  // controller.isLoading = false;
-                                  // setState(() {
-                                  //   isLoading = false;
-                                  // });
-                                  Get.to(
-                                    () => HomeScreen(userId: widget.userId),
-                                  );
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         HomeScreen(userId: widget.userId),
-                                  //   ),
-                                  // );
-                                },
-                              );
+                          Button(
+                            text: "ADD BOOK",
+                            onTap: () async {
+                              await controller.insertData(userId);
                             },
                           ),
                         ],
