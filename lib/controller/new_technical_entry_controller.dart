@@ -15,14 +15,33 @@ class NewTechnicalEntryController extends GetxController {
   final Rx<List<Technical>> technical = Rx<List<Technical>>([]);
   var _id;
   bool isLoading = false;
+  bool isDisplayLoading = true;
   String productImage = "";
   File? image;
+  List<Map<String, dynamic>> result = [];
   TextEditingController nameController = TextEditingController();
   TextEditingController modelNoController = TextEditingController();
   TextEditingController specificationController = TextEditingController();
   TextEditingController billNoController = TextEditingController();
   TextEditingController companyNameController = TextEditingController();
   TextEditingController costController = TextEditingController();
+
+  Future<List<Map<String, dynamic>>> displayData() async {
+    try {
+      result = await MongoDatabaseTechnical().getData();
+      int totalLength = result.length;
+      log(totalLength.toString());
+      isDisplayLoading = false;
+      update();
+      return result;
+    } catch (e) {
+      log(e.toString());
+      showSnackBar("Error occurred", e.toString());
+      isDisplayLoading = false;
+      update();
+      return result;
+    }
+  }
 
   Future<void> insertData(var userId) async {
     try {
@@ -31,7 +50,7 @@ class NewTechnicalEntryController extends GetxController {
 
       productImage = await uploadProductImage(image, nameController.text);
 
-      _id = M.ObjectId;
+      _id = M.ObjectId();
       final data = Technical(
         id: _id,
         name: nameController.text,
@@ -83,7 +102,7 @@ class NewTechnicalEntryController extends GetxController {
     if (temp != null) {
       image = temp;
       update();
-    } 
+    }
     // else {
     //   showSnackBar("Error occurred", "Image was not picked");
     // }

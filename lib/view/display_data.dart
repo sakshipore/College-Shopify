@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:college_shopify/constants.dart/text_style.dart';
+import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:college_shopify/widgets/button.dart';

@@ -15,10 +15,29 @@ class NewStationaryEntryController extends GetxController {
   final Rx<List<Stationary>> stationary = Rx<List<Stationary>>([]);
   var _id;
   bool isLoading = false;
+  bool isDisplayLoading = false;
   String productImage = "";
   File? image;
+  List<Map<String, dynamic>> result = [];
   TextEditingController itemController = TextEditingController();
   TextEditingController costController = TextEditingController();
+
+  Future<List<Map<String, dynamic>>> displayData() async {
+    try {
+      result = await MongoDatabaseStationary().getData();
+      int totalLength = result.length;
+      log(totalLength.toString());
+      isDisplayLoading = false;
+      update();
+      return result;
+    } catch (e) {
+      log(e.toString());
+      showSnackBar("Error occurred", e.toString());
+      isDisplayLoading = false;
+      update();
+      return result;
+    }
+  }
 
   Future<void> insertData(var userId) async {
     try {
@@ -27,7 +46,7 @@ class NewStationaryEntryController extends GetxController {
 
       productImage = await uploadProductImage(image, itemController.text);
 
-      _id = M.ObjectId;
+      _id = M.ObjectId();
       final data = Stationary(
         id: _id,
         item: itemController.text,

@@ -15,13 +15,32 @@ class NewBookEntryController extends GetxController {
   final Rx<List<Book>> book = Rx<List<Book>>([]);
   var _id;
   bool isLoading = false;
+  bool isDisplayLoading = true;
   String productImage = "";
   File? image;
+  List<Map<String, dynamic>> result = [];
   TextEditingController nameController = TextEditingController();
   TextEditingController authorController = TextEditingController();
   TextEditingController costController = TextEditingController();
   TextEditingController editionController = TextEditingController();
   TextEditingController publicationController = TextEditingController();
+
+  Future<List<Map<String, dynamic>>> displayData() async {
+    try {
+      result = await MongoDatabaseBook().getData();
+      int totalLength = result.length;
+      log(totalLength.toString());
+      isDisplayLoading = false;
+      update();
+      return result;
+    } catch (e) {
+      log(e.toString());
+      showSnackBar("Error occurred", e.toString());
+      isDisplayLoading = false;
+      update();
+      return result;
+    }
+  }
 
   Future<void> insertData(var userId) async {
     try {
@@ -30,7 +49,7 @@ class NewBookEntryController extends GetxController {
 
       productImage = await uploadProductImage(image, nameController.text);
 
-      _id = M.ObjectId;
+      _id = M.ObjectId();
       final data = Book(
         id: _id,
         name: nameController.text,
