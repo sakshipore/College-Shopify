@@ -8,7 +8,6 @@ import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/utils/pick_image.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
@@ -73,6 +72,7 @@ class NewBookEntryController extends GetxController {
     costController.text = "";
     editionController.text = "";
     publicationController.text = "";
+    productImage = "";
   }
 
   selectImage() async {
@@ -80,8 +80,9 @@ class NewBookEntryController extends GetxController {
     if (temp != null) {
       image = temp;
       update();
-    } else {
-      showSnackBar("Error occurred", "Image was not picked");
     }
+    //else {
+    //   showSnackBar("Error occurred", "Image was not picked");
+    // }
   }
 }
