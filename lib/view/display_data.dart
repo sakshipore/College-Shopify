@@ -1,13 +1,7 @@
-import 'dart:developer';
-
-import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/login_controller.dart';
-import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
-import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/display_card_data.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +37,7 @@ class _DisplayDataState extends State<DisplayData> {
                 ),
                 headingText(text: "Seller Details"),
                 Container(
-                  child: controller.isLoading
+                  child: controller.isDisplayDataLoading
                       ? Center(
                           child: CircularProgressIndicator(),
                         )

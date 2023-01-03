@@ -12,6 +12,7 @@ class LoginController extends GetxController {
   var userId;
   bool inserted = false;
   bool isLoading = true;
+  bool isDisplayDataLoading = true;
   Map<String, dynamic>? result = {};
 
   @override
@@ -67,14 +68,14 @@ class LoginController extends GetxController {
   Future<Map<String, dynamic>?> displayData(var userId) async {
     try {
       result = await MongoDatabase.fetchUserData(userId);
-      log(result.toString());
-      isLoading = false;
+      log("FETCH USER RES " + result.toString());
+      isDisplayDataLoading = false;
       update();
       return result;
     } catch (e) {
       log(e.toString());
       showSnackBar("Error occurred", e.toString());
-      isLoading = false;
+      isDisplayDataLoading = false;
       update();
       return result;
     }

@@ -32,8 +32,8 @@ class MongoDBModel {
         fname: json["fname"],
         lname: json["lname"],
         mobNo: json["mobNo"],
-        product: json["product"],
-        boughtProducts: json["boughtProducts"],
+        product: json["product"] ?? [],
+        boughtProducts: json["boughtProducts"] ?? [],
       );
 
   Map<String, dynamic> toJson() => {
