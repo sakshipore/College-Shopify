@@ -85,6 +85,20 @@ class NewBookEntryController extends GetxController {
     }
   }
 
+  Future<void> updateBoughtData(var userId, var productId) async {
+    try {
+      await updateBoughtData(userId, productId);
+      Get.toNamed(
+        RoutesNames.homeScreen,
+        arguments: userId,
+      );
+      showSnackBar("Updated ID: ", "$userId");
+    } catch (e) {
+      log(e.toString());
+      showSnackBar("Error occurred", e.toString());
+    }
+  }
+
   clearAll() {
     nameController.text = "";
     authorController.text = "";

@@ -53,10 +53,10 @@ class DisplayCardTechnical extends StatelessWidget {
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Bill no.: " + data.billNo),
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                  // whiteText(text: "Bill no.: " + data.billNo),
+                  // SizedBox(
+                  //   height: 5.h,
+                  // ),
                   whiteText(text: "Cost: " + data.cost),
                   SizedBox(
                     height: 5.h,

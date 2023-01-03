@@ -14,10 +14,7 @@ class DisplayCardData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 100.h,
-        ),
-        headingText(text: "Seller Details"),
+        
         SizedBox(
           height: 50.h,
         ),

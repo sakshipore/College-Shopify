@@ -12,7 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DisplayTechnicalProductScreen extends StatefulWidget {
-  const DisplayTechnicalProductScreen({super.key});
+  var userId;
+  DisplayTechnicalProductScreen({super.key, required this.userId});
 
   @override
   State<DisplayTechnicalProductScreen> createState() =>
@@ -56,6 +57,11 @@ class _DisplayTechnicalProductScreenState
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
+                                  onTap: () {
+                                    Get.to(
+                                      () => DisplayData(userId: widget.userId,),
+                                    );
+                                  },
                                   child: DisplayCardTechnical(
                                     data: Technical.fromJson(
                                       controller.result[index],

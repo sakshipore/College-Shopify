@@ -21,6 +21,22 @@ Future<void> updateData(var productId, var userId) async {
   }
 }
 
+Future<void> updateBoughtProducts(var productId, var userId) async {
+  Map<String, dynamic>? userData = await MongoDatabase.fetchUserData(userId);
+
+  if (userData == null) return;
+  List productIds = userData["boughtProducts"];
+  productIds.add(productId);
+  var result = await MongoDatabase.update(userId, productIds);
+  log(result.toString());
+
+  if (result["Success"] == false) {
+    showSnackBar("Error occurred", result["Msg"]);
+  } else {
+    showSnackBar("Updated ID: ", "$productId");
+  }
+}
+
 Future<String> uploadProductImage(File? image, String name) async {
   Reference ref = FirebaseStorage.instance
       .ref()

@@ -14,6 +14,7 @@ class MongoDBModel {
   String lname;
   String mobNo;
   List product;
+  List boughtProducts;
 
   MongoDBModel({
     required this.id,
@@ -22,6 +23,7 @@ class MongoDBModel {
     required this.lname,
     required this.mobNo,
     required this.product,
+    required this.boughtProducts,
   });
 
   factory MongoDBModel.fromJson(Map<String, dynamic> json) => MongoDBModel(
@@ -31,6 +33,7 @@ class MongoDBModel {
         lname: json["lname"],
         mobNo: json["mobNo"],
         product: json["product"],
+        boughtProducts: json["boughtProducts"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,5 +43,6 @@ class MongoDBModel {
         "lname": lname,
         "mobNo": mobNo,
         "product": product,
+        "boughtProducts": boughtProducts,
       };
 }

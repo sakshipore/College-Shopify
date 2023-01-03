@@ -1,5 +1,6 @@
 import 'package:college_shopify/controller/new_book_entry_controller.dart';
 import 'package:college_shopify/model/books.dart';
+import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_book.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DisplayBookProductScreen extends StatefulWidget {
-  DisplayBookProductScreen({super.key});
+  var userId;
+  DisplayBookProductScreen({super.key, required this.userId});
 
   @override
   State<DisplayBookProductScreen> createState() =>
@@ -50,6 +52,13 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
+                                  onTap: () {
+                                    Get.to(
+                                      () => DisplayData(
+                                        userId: widget.userId,
+                                      ),
+                                    );
+                                  },
                                   child: DisplayCardBook(
                                     data: Book.fromJson(
                                       controller.result[index],
