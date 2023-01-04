@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:college_shopify/controller/login_controller.dart';
 import 'package:college_shopify/controller/new_entry_controller.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
+import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/display_card_data.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayData extends StatefulWidget {
   var userId;
-  DisplayData({super.key, required this.userId});
+  var productId;
+  DisplayData({super.key, required this.userId, required this.productId});
 
   @override
   State<DisplayData> createState() => _DisplayDataState();
@@ -42,10 +46,24 @@ class _DisplayDataState extends State<DisplayData> {
                       ? Center(
                           child: CircularProgressIndicator(),
                         )
-                      : Container(
-                          child: DisplayCardData(
-                            data: MongoDBModel.fromJson(controller.result!),
-                          ),
+                      : Column(
+                          children: [
+                            Container(
+                              child: DisplayCardData(
+                                data: MongoDBModel.fromJson(controller.result!),
+                              ),
+                            ),
+                            Button(
+                              text: "BUY PRODUCT",
+                              onTap: () async {
+                                log(widget.productId.toString());
+                                await controller.boughtProducts(
+                                  widget.userId,
+                                  widget.productId,
+                                );
+                              },
+                            )
+                          ],
                         ),
                 ),
               ],

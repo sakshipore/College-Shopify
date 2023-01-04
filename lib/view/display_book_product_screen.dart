@@ -59,6 +59,7 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                                     Get.to(
                                       () => DisplayData(
                                         userId: data.userId,
+                                        productId: data.id,
                                       ),
                                     );
                                   },

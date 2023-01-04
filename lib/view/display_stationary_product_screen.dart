@@ -64,6 +64,7 @@ class _DisplayStationaryProductScreenState
                                     Get.to(
                                       () => DisplayData(
                                         userId: data.userId,
+                                        productId: data.id,
                                       ),
                                     );
                                   },

@@ -14,7 +14,6 @@ class DisplayCardData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        
         SizedBox(
           height: 50.h,
         ),
@@ -34,11 +33,12 @@ class DisplayCardData extends StatelessWidget {
         SizedBox(
           height: 30.h,
         ),
-        Button(
-            text: "BUY PRODUCT",
-            onTap: () {
-              Navigator.pop(context);
-            })
+        // Button(
+        //   text: "BUY PRODUCT",
+        //   onTap: () {
+        //     Navigator.pop(context);
+        //   },
+        // )
       ],
     );
   }

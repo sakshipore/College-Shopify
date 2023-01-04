@@ -62,7 +62,7 @@ class _DisplayTechnicalProductScreenState
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(
-                                      () => DisplayData(userId: data.userId),
+                                      () => DisplayData(userId: data.userId, productId: data.id,),
                                     );
                                   },
                                   child: DisplayCardTechnical(data: data),
