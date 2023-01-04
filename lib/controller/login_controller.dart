@@ -12,8 +12,8 @@ class LoginController extends GetxController {
   var userId;
   bool inserted = false;
   bool isLoading = true;
-  bool isDisplayDataLoading = true;
-  Map<String, dynamic>? result = {};
+  
+  
 
   @override
   void onInit() {
@@ -65,19 +65,5 @@ class LoginController extends GetxController {
     return inserted;
   }
 
-  Future<Map<String, dynamic>?> displayData(var userId) async {
-    try {
-      result = await MongoDatabase.fetchUserData(userId);
-      log("FETCH USER RES " + result.toString());
-      isDisplayDataLoading = false;
-      update();
-      return result;
-    } catch (e) {
-      log(e.toString());
-      showSnackBar("Error occurred", e.toString());
-      isDisplayDataLoading = false;
-      update();
-      return result;
-    }
-  }
+  
 }

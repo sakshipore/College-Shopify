@@ -1,4 +1,5 @@
 import 'package:college_shopify/controller/login_controller.dart';
+import 'package:college_shopify/controller/new_entry_controller.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:college_shopify/widgets/display_card_data.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
@@ -15,17 +16,17 @@ class DisplayData extends StatefulWidget {
 }
 
 class _DisplayDataState extends State<DisplayData> {
-  final LoginController loginController = Get.put(LoginController());
+  final NewEntryController newEntryController = Get.put(NewEntryController());
 
   @override
   void initState() {
-    loginController.displayData(widget.userId);
+    newEntryController.displayData(widget.userId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(builder: (controller) {
+    return GetBuilder<NewEntryController>(builder: (controller) {
       return Scaffold(
         body: SingleChildScrollView(
           child: Padding(
