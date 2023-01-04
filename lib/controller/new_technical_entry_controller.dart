@@ -13,7 +13,7 @@ import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class NewTechnicalEntryController extends GetxController {
   final Rx<List<Technical>> technical = Rx<List<Technical>>([]);
-  var _id;
+  M.ObjectId? _id;
   bool isLoading = false;
   bool isDisplayLoading = true;
   String productImage = "";
@@ -49,10 +49,11 @@ class NewTechnicalEntryController extends GetxController {
       update();
 
       productImage = await uploadProductImage(image, nameController.text);
-
+      log("*************************");
       _id = M.ObjectId();
+      log(userId.toString());
       final data = Technical(
-        id: _id,
+        id: _id!,
         name: nameController.text,
         modelNo: modelNoController.text,
         specification: specificationController.text,
@@ -62,7 +63,7 @@ class NewTechnicalEntryController extends GetxController {
         userId: userId,
         productImage: productImage,
       );
-
+      log(_id.toString());
       Map<String, dynamic> result =
           await MongoDatabaseTechnical().insert(data.toJson());
       log(result.toString());
@@ -73,7 +74,7 @@ class NewTechnicalEntryController extends GetxController {
           RoutesNames.homeScreen,
           arguments: userId,
         );
-        showSnackBar("Inserted ID: ", "${_id.$oid}");
+        showSnackBar("Inserted ID: ", "${_id!.$oid}");
       } else {
         showSnackBar("Error occurred", result["Msg"]);
       }

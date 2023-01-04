@@ -12,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DisplayStationaryProductScreen extends StatefulWidget {
-  var userId;
-  DisplayStationaryProductScreen({super.key, required this.userId});
+  var userID;
+  DisplayStationaryProductScreen({super.key, required this.userID});
 
   @override
   State<DisplayStationaryProductScreen> createState() =>
@@ -56,16 +56,19 @@ class _DisplayStationaryProductScreenState
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
+                                Stationary data = Stationary.fromJson(
+                                  controller.result[index],
+                                );
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(
-                                      () => DisplayData(userId: widget.userId,),
+                                      () => DisplayData(
+                                        userId: data.userId,
+                                      ),
                                     );
                                   },
                                   child: DisplayCardStationary(
-                                    data: Stationary.fromJson(
-                                      controller.result[index],
-                                    ),
+                                    data: data,
                                   ),
                                 );
                               },

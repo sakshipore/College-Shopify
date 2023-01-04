@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:college_shopify/view/new_book_entry_screen.dart';
 import 'package:college_shopify/view/new_stationary_entry_screen.dart';
 import 'package:college_shopify/view/new_technical_entry_screen.dart';
@@ -33,6 +35,7 @@ class ProductsScreen extends StatelessWidget {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
+                    log("IN PRODUCT SCREEN : $userId");
                     Get.to(
                       () => NewBookEntryScreen(userId: userId),
                     );
@@ -46,6 +49,7 @@ class ProductsScreen extends StatelessWidget {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
+                    log("IN PRODUCT SCREEN : $userId");
                     Get.to(
                       () => NewStationaryEntryScreen(userId: userId),
                     );
@@ -59,6 +63,7 @@ class ProductsScreen extends StatelessWidget {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
+                    log("IN PRODUCT SCREEN : $userId");
                     Get.to(
                       () => NewTechnicalEntryScreen(userId: userId),
                     );

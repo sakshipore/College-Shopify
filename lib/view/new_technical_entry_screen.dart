@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:college_shopify/controller/new_technical_entry_controller.dart';
@@ -9,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 class NewTechnicalEntryScreen extends StatelessWidget {
   var userId;
   NewTechnicalEntryScreen({super.key, required this.userId});
 
-  final NewTechnicalEntryController technicalEntryController = Get.put(NewTechnicalEntryController());
+  final NewTechnicalEntryController technicalEntryController =
+      Get.put(NewTechnicalEntryController());
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +116,9 @@ class NewTechnicalEntryScreen extends StatelessWidget {
                         ),
                         Button(
                           text: "ADD TECHNICAL",
-                          onTap: () async {
-                            await controller.insertData(userId);
+                          onTap: () {
+                            log("BEFORE FUNCTION : $userId");
+                            controller.insertData(userId);
                           },
                         ),
                       ],

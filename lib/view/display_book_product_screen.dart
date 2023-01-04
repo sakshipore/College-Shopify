@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DisplayBookProductScreen extends StatefulWidget {
-  var userId;
-  DisplayBookProductScreen({super.key, required this.userId});
+  var userID;
+  DisplayBookProductScreen({super.key, required this.userID});
 
   @override
   State<DisplayBookProductScreen> createState() =>
@@ -51,18 +51,19 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
+                                Book data = Book.fromJson(
+                                  controller.result[index],
+                                );
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(
                                       () => DisplayData(
-                                        userId: widget.userId,
+                                        userId: data.userId,
                                       ),
                                     );
                                   },
                                   child: DisplayCardBook(
-                                    data: Book.fromJson(
-                                      controller.result[index],
-                                    ),
+                                    data: data,
                                   ),
                                 );
                               },

@@ -34,7 +34,7 @@ class DisplayProductsScreen extends StatelessWidget {
                   height: 150,
                   onTap: () {
                     Get.to(
-                      () => DisplayBookProductScreen(userId: userId,),
+                      () => DisplayBookProductScreen(userID: userId,),
                     );
                   },
                 ),
@@ -47,7 +47,7 @@ class DisplayProductsScreen extends StatelessWidget {
                   height: 150,
                   onTap: () {
                     Get.to(
-                      () => DisplayStationaryProductScreen(userId: userId,),
+                      () => DisplayStationaryProductScreen(userID: userId,),
                     );
                   },
                 ),
@@ -60,7 +60,7 @@ class DisplayProductsScreen extends StatelessWidget {
                   height: 150,
                   onTap: () {
                     Get.to(
-                      () => DisplayTechnicalProductScreen(userId: userId,),
+                      () => DisplayTechnicalProductScreen(userID: userId,),
                     );
                   },
                 ),
