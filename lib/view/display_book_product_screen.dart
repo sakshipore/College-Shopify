@@ -58,7 +58,7 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                                   onTap: () {
                                     Get.to(
                                       () => DisplayData(
-                                        userId: data.userId,
+                                        userId: widget.userID,
                                         productId: data.id,
                                       ),
                                     );

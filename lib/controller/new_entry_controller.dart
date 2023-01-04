@@ -30,15 +30,12 @@ class NewEntryController extends GetxController {
 
   Future<void> boughtProducts(var userId, var productId) async {
     try {
-      updateBoughtProducts(productId, userId);
-      log(productId.toString());
-      log(userId.toString());
+      await updateBoughtProducts(productId, userId);
       Get.toNamed(
         RoutesNames.homeScreen,
         arguments: userId,
       );
       showSnackBar("Inserted ID: ", "$productId");
-      
     } catch (e) {
       log(e.toString());
       showSnackBar("Error occurred", e.toString());
