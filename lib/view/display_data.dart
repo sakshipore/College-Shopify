@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:college_shopify/controller/login_controller.dart';
 import 'package:college_shopify/controller/new_entry_controller.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:college_shopify/widgets/button.dart';
@@ -30,43 +29,45 @@ class _DisplayDataState extends State<DisplayData> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewEntryController>(builder: (controller) {
-      return Scaffold(
-        body: (controller.isDisplayDataLoading ||
-                controller.isboughtProductLoading)
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 100.h,
-                      ),
-                      headingText(text: "Seller Details"),
-                      Container(
-                        child: DisplayCardData(
-                          data: MongoDBModel.fromJson(controller.result!),
+    return GetBuilder<NewEntryController>(
+      builder: (controller) {
+        return Scaffold(
+          body: (controller.isDisplayDataLoading ||
+                  controller.isboughtProductLoading)
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 100.h,
                         ),
-                      ),
-                      Button(
-                        text: "BUY PRODUCT",
-                        onTap: () async {
-                          log(widget.productId.toString());
-                          await controller.boughtProducts(
-                            widget.userId,
-                            widget.productId,
-                          );
-                        },
-                      )
-                    ],
+                        headingText(text: "Seller Details"),
+                        Container(
+                          child: DisplayCardData(
+                            data: MongoDBModel.fromJson(controller.result!),
+                          ),
+                        ),
+                        Button(
+                          text: "BUY PRODUCT",
+                          onTap: () async {
+                            log(widget.productId.toString());
+                            await controller.boughtProducts(
+                              widget.userId,
+                              widget.productId,
+                            );
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 

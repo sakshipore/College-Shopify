@@ -1,8 +1,5 @@
-import 'dart:developer';
 
-import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/new_technical_entry_controller.dart';
-import 'package:college_shopify/db_helper/mongodb_technical.dart';
 import 'package:college_shopify/model/technical.dart';
 import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_technical.dart';

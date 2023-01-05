@@ -1,5 +1,6 @@
 import 'package:college_shopify/view/display_products_screen.dart';
 import 'package:college_shopify/view/products_screen.dart';
+import 'package:college_shopify/view/profile_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +44,23 @@ class HomeScreen extends StatelessWidget {
                 ProductCard(
                   text: "Buying Product",
                   image: "assets/images/buying_product.jpg",
-                  height: 200,
+                  height: 200.h,
                   onTap: () {
                     Get.to(
                       () => DisplayProductsScreen(userId: userId),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                ProductCard(
+                  text: "Profile",
+                  image: "assets/images/buying_product.jpg",
+                  height: 200.h,
+                  onTap: () {
+                    Get.to(
+                      () => ProfileScreen(userId: userId),
                     );
                   },
                 ),
