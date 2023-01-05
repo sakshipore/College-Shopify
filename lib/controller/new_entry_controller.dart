@@ -36,6 +36,7 @@ class NewEntryController extends GetxController {
       await updateBoughtProducts(productId, userId);
       log(productId.toString());
       log(userId.toString());
+      await updateBoughtProducts(productId, userId);
       Get.toNamed(
         RoutesNames.homeScreen,
         arguments: userId,

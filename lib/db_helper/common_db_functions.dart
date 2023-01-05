@@ -23,6 +23,7 @@ Future<void> updateData(var productId, var userId) async {
 
 Future<void> updateBoughtProducts(var productId, var userId) async {
   Map<String, dynamic>? userData = await MongoDatabase.fetchUserData(userId);
+  log("User data : " + userData.toString());
 
   if (userData == null) return;
   List productIds = userData["boughtProducts"];
