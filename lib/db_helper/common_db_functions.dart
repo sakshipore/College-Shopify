@@ -27,8 +27,8 @@ Future<void> updateBoughtProducts(var productId, var userId) async {
   if (userData == null) return;
   List productIds = userData["boughtProducts"];
   productIds.add(productId);
-  var result = await MongoDatabase.update(userId, productIds);
-  log(result.toString());
+  var result = await MongoDatabase.updateBuyProduct(userId, productIds);
+  log("Update Response: "+result.toString());
 
   if (result["Success"] == false) {
     showSnackBar("Error occurred", result["Msg"]);

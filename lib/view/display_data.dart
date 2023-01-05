@@ -32,44 +32,39 @@ class _DisplayDataState extends State<DisplayData> {
   Widget build(BuildContext context) {
     return GetBuilder<NewEntryController>(builder: (controller) {
       return Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 100.h,
-                ),
-                headingText(text: "Seller Details"),
-                Container(
-                  child: controller.isDisplayDataLoading
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Column(
-                          children: [
-                            Container(
-                              child: DisplayCardData(
-                                data: MongoDBModel.fromJson(controller.result!),
-                              ),
-                            ),
-                            Button(
-                              text: "BUY PRODUCT",
-                              onTap: () async {
-                                log(widget.productId.toString());
-                                await controller.boughtProducts(
-                                  widget.userId,
-                                  widget.productId,
-                                );
-                              },
-                            )
-                          ],
+        body: (controller.isDisplayDataLoading ||
+                controller.isboughtProductLoading)
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100.h,
+                      ),
+                      headingText(text: "Seller Details"),
+                      Container(
+                        child: DisplayCardData(
+                          data: MongoDBModel.fromJson(controller.result!),
                         ),
+                      ),
+                      Button(
+                        text: "BUY PRODUCT",
+                        onTap: () async {
+                          log(widget.productId.toString());
+                          await controller.boughtProducts(
+                            widget.userId,
+                            widget.productId,
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
+              ),
       );
     });
   }

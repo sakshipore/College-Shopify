@@ -10,6 +10,7 @@ class NewEntryController extends GetxController {
   final Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
 
   bool isDisplayDataLoading = true;
+  bool isboughtProductLoading = false;
   Map<String, dynamic>? result = {};
 
   Future<Map<String, dynamic>?> displayData(var userId) async {
@@ -30,7 +31,9 @@ class NewEntryController extends GetxController {
 
   Future<void> boughtProducts(var userId, var productId) async {
     try {
-      updateBoughtProducts(productId, userId);
+      isboughtProductLoading = true;
+      update();
+      await updateBoughtProducts(productId, userId);
       log(productId.toString());
       log(userId.toString());
       Get.toNamed(
@@ -38,10 +41,12 @@ class NewEntryController extends GetxController {
         arguments: userId,
       );
       showSnackBar("Inserted ID: ", "$productId");
-      
     } catch (e) {
       log(e.toString());
       showSnackBar("Error occurred", e.toString());
+    } finally {
+      isboughtProductLoading = false;
+      update();
     }
   }
 }

@@ -88,4 +88,18 @@ class MongoDatabase {
       };
     }
   }
+
+  static Future<Map<String, dynamic>> updateBuyProduct(
+      var userId, List productIds) async {
+    try {
+      var result = await usersCollection.update(
+          where.eq('id', userId), modify.set('boughtProducts', productIds));
+      return result;
+    } catch (e) {
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
+    }
+  }
 }
