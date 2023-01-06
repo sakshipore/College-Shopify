@@ -23,6 +23,7 @@ class NewTechnicalEntryController extends GetxController {
   TextEditingController productCostController = TextEditingController();
   TextEditingController productSpecificationController =
       TextEditingController();
+  TextEditingController productTypeController = TextEditingController();
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
@@ -56,6 +57,7 @@ class NewTechnicalEntryController extends GetxController {
         productName: productNameController.text,
         productCost: productCostController.text,
         productSpecification: productSpecificationController.text,
+        productType: productTypeController.text,
         userId: userId,
         productImage: productImage,
       );
@@ -88,6 +90,7 @@ class NewTechnicalEntryController extends GetxController {
     productNameController.text = "";
     productCostController.text = "";
     productSpecificationController.text = "";
+    productTypeController.text = "";
   }
 
   selectImage() async {

@@ -9,12 +9,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class NewProductEntryScreen extends StatelessWidget {
+class NewProductEntryScreen extends StatefulWidget {
   var userId;
   NewProductEntryScreen({super.key, required this.userId});
 
+  @override
+  State<NewProductEntryScreen> createState() => _NewProductEntryScreenState();
+}
+
+class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
+  @override
+  void initState() {
+    _selectedValue = _productSizesList[0];
+    super.initState();
+  }
+
   final NewBookEntryController bookEntryController =
       Get.put(NewBookEntryController());
+
+  final _productSizesList = [
+    "Select Product Type",
+    "Book",
+    "Technical",
+    "Stationary"
+  ];
+
+  String? _selectedValue = "Select Product Type";
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +70,27 @@ class NewProductEntryScreen extends StatelessWidget {
                           ),
                           FormText(
                             text: "Product Specification",
-                            controller: controller.productSpecificationController,
+                            controller:
+                                controller.productSpecificationController,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          DropdownButton(
+                            value: _selectedValue,
+                            items: _productSizesList
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    child: Text(e),
+                                    value: e,
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedValue = value;
+                              });
+                            },
                           ),
                           SizedBox(
                             height: 10.h,
@@ -93,7 +133,7 @@ class NewProductEntryScreen extends StatelessWidget {
                           Button(
                             text: "ADD PRODUCT",
                             onTap: () async {
-                              await controller.insertData(userId);
+                              await controller.insertData(widget.userId);
                             },
                           ),
                         ],

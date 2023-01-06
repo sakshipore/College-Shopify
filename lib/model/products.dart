@@ -11,6 +11,7 @@ class Product {
   String productName;
   String productCost;
   String productSpecification;
+  String productType;
   ObjectId userId;
   String productImage;
 
@@ -19,6 +20,7 @@ class Product {
     required this.productName,
     required this.productCost,
     required this.productSpecification,
+    required this.productType,
     required this.userId,
     required this.productImage,
   });
@@ -28,6 +30,7 @@ class Product {
         productName: json["productName"],
         productCost: json["productCost"],
         productSpecification: json["productSpecification"],
+        productType: json["productType"],
         userId: json["userId"],
         productImage: json["productImage"],
       );
@@ -37,6 +40,7 @@ class Product {
         "productName": productName,
         "productCost": productCost,
         "productSpecification": productSpecification,
+        "productType": productType,
         "userId": userId,
         "productImage": productImage,
       };

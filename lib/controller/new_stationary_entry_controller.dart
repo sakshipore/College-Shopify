@@ -23,6 +23,7 @@ class NewStationaryEntryController extends GetxController {
   TextEditingController productCostController = TextEditingController();
   TextEditingController productSpecificationController =
       TextEditingController();
+  TextEditingController productTypeController = TextEditingController();
   
 
   Future<List<Map<String, dynamic>>> displayData() async {
@@ -55,6 +56,7 @@ class NewStationaryEntryController extends GetxController {
         productName: productNameController.text,
         productCost: productCostController.text,
         productSpecification: productSpecificationController.text,
+        productType: productTypeController.text,
         userId: userId,
         productImage: productImage,
       );
@@ -87,6 +89,7 @@ class NewStationaryEntryController extends GetxController {
     productNameController.text = "";
     productCostController.text = "";
     productSpecificationController.text = "";
+    productTypeController.text = "";
   }
 
   selectImage() async {
