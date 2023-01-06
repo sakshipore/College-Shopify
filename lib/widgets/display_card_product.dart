@@ -1,11 +1,11 @@
-import 'package:college_shopify/model/books.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DisplayCardBook extends StatelessWidget {
-  Book data;
-  DisplayCardBook({super.key, required this.data});
+class DisplayCardProduct extends StatelessWidget {
+  Product data;
+  DisplayCardProduct({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +37,23 @@ class DisplayCardBook extends StatelessWidget {
                   // SizedBox(
                   //   height: 5.h,
                   // ),
-                  whiteText(text: "Name of Book: " + data.name),
+                  whiteText(text: "Product Name: " + data.productName),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Author: " + data.author),
+                  whiteText(text: "Product Id: " + data.productId.toString()),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Edition: " + data.edition),
+                  whiteText(
+                      text: "Product Specification: " + data.productSpecification),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Publication: " + data.publication),
+                  whiteText(text: "Product Cost: " + data.productCost),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Cost: " + data.cost),
                 ],
               ),
             ),

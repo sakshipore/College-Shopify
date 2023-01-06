@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:college_shopify/db_helper/common_db_functions.dart';
 import 'package:college_shopify/db_helper/mongodb_stationary.dart';
-import 'package:college_shopify/model/stationary.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/utils/pick_image.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
@@ -12,15 +12,18 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class NewStationaryEntryController extends GetxController {
-  final Rx<List<Stationary>> stationary = Rx<List<Stationary>>([]);
+  // final Rx<List<Stationary>> stationary = Rx<List<Stationary>>([]);
   var _id;
   bool isLoading = false;
   bool isDisplayLoading = false;
   String productImage = "";
   File? image;
   List<Map<String, dynamic>> result = [];
-  TextEditingController itemController = TextEditingController();
-  TextEditingController costController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
+  TextEditingController productCostController = TextEditingController();
+  TextEditingController productSpecificationController =
+      TextEditingController();
+  
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
@@ -44,13 +47,14 @@ class NewStationaryEntryController extends GetxController {
       isLoading = true;
       update();
 
-      productImage = await uploadProductImage(image, itemController.text);
+      productImage = await uploadProductImage(image, productNameController.text);
 
       _id = M.ObjectId();
-      final data = Stationary(
-        id: _id,
-        item: itemController.text,
-        cost: costController.text,
+      final data = Product(
+        productId: _id,
+        productName: productNameController.text,
+        productCost: productCostController.text,
+        productSpecification: productSpecificationController.text,
         userId: userId,
         productImage: productImage,
       );
@@ -80,9 +84,9 @@ class NewStationaryEntryController extends GetxController {
   }
 
   clearAll() {
-    itemController.text = "";
-    costController.text = "";
-    productImage = "";
+    productNameController.text = "";
+    productCostController.text = "";
+    productSpecificationController.text = "";
   }
 
   selectImage() async {

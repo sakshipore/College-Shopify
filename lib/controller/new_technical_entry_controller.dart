@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:college_shopify/db_helper/common_db_functions.dart';
 import 'package:college_shopify/db_helper/mongodb_technical.dart';
-import 'package:college_shopify/model/technical.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/utils/pick_image.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
@@ -12,19 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class NewTechnicalEntryController extends GetxController {
-  final Rx<List<Technical>> technical = Rx<List<Technical>>([]);
-  M.ObjectId? _id;
+  // final Rx<List<Technical>> technical = Rx<List<Technical>>([]);
+  var _id;
   bool isLoading = false;
   bool isDisplayLoading = true;
   String productImage = "";
   File? image;
   List<Map<String, dynamic>> result = [];
-  TextEditingController nameController = TextEditingController();
-  TextEditingController modelNoController = TextEditingController();
-  TextEditingController specificationController = TextEditingController();
-  TextEditingController billNoController = TextEditingController();
-  TextEditingController companyNameController = TextEditingController();
-  TextEditingController costController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
+  TextEditingController productCostController = TextEditingController();
+  TextEditingController productSpecificationController =
+      TextEditingController();
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
@@ -48,18 +46,16 @@ class NewTechnicalEntryController extends GetxController {
       isLoading = true;
       update();
 
-      productImage = await uploadProductImage(image, nameController.text);
+      productImage =
+          await uploadProductImage(image, productNameController.text);
       log("*************************");
       _id = M.ObjectId();
       log(userId.toString());
-      final data = Technical(
-        id: _id!,
-        name: nameController.text,
-        modelNo: modelNoController.text,
-        specification: specificationController.text,
-        billNo: billNoController.text,
-        companyName: companyNameController.text,
-        cost: costController.text,
+      final data = Product(
+        productId: _id,
+        productName: productNameController.text,
+        productCost: productCostController.text,
+        productSpecification: productSpecificationController.text,
         userId: userId,
         productImage: productImage,
       );
@@ -89,13 +85,9 @@ class NewTechnicalEntryController extends GetxController {
   }
 
   clearAll() {
-    nameController.text = "";
-    modelNoController.text = "";
-    specificationController.text = "";
-    billNoController.text = "";
-    companyNameController.text = "";
-    costController.text = "";
-    productImage = "";
+    productNameController.text = "";
+    productCostController.text = "";
+    productSpecificationController.text = "";
   }
 
   selectImage() async {

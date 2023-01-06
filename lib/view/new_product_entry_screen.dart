@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class NewBookEntryScreen extends StatelessWidget {
+class NewProductEntryScreen extends StatelessWidget {
   var userId;
-  NewBookEntryScreen({super.key, required this.userId});
+  NewProductEntryScreen({super.key, required this.userId});
 
   final NewBookEntryController bookEntryController =
       Get.put(NewBookEntryController());
@@ -37,41 +37,27 @@ class NewBookEntryScreen extends StatelessWidget {
                           SizedBox(
                             height: 50.h,
                           ),
-                          headingText(text: "Books"),
+                          headingText(text: "Product"),
                           SizedBox(
                             height: 75.h,
                           ),
                           FormText(
-                            text: "Book Name",
-                            controller: controller.nameController,
+                            text: "Product Name",
+                            controller: controller.productNameController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
-                            text: "Author",
-                            controller: controller.authorController,
+                            text: "Product Specification",
+                            controller: controller.productSpecificationController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
-                            text: "Edition",
-                            controller: controller.editionController,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          FormText(
-                            text: "Publication",
-                            controller: controller.publicationController,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          FormText(
-                            text: "Cost",
-                            controller: controller.costController,
+                            text: "Product Cost",
+                            controller: controller.productCostController,
                           ),
                           SizedBox(
                             height: 20.h,
@@ -105,7 +91,7 @@ class NewBookEntryScreen extends StatelessWidget {
                             height: 30.h,
                           ),
                           Button(
-                            text: "ADD BOOK",
+                            text: "ADD PRODUCT",
                             onTap: () async {
                               await controller.insertData(userId);
                             },

@@ -1,8 +1,7 @@
-
 import 'package:college_shopify/controller/new_stationary_entry_controller.dart';
-import 'package:college_shopify/model/stationary.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
-import 'package:college_shopify/widgets/display_card_stationary.dart';
+import 'package:college_shopify/widgets/display_card_product.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +52,7 @@ class _DisplayStationaryProductScreenState
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                Stationary data = Stationary.fromJson(
+                                Product data = Product.fromJson(
                                   controller.result[index],
                                 );
                                 return GestureDetector(
@@ -61,11 +60,11 @@ class _DisplayStationaryProductScreenState
                                     Get.to(
                                       () => DisplayData(
                                         userId: data.userId,
-                                        productId: data.id,
+                                        productId: data.productId,
                                       ),
                                     );
                                   },
-                                  child: DisplayCardStationary(
+                                  child: DisplayCardProduct(
                                     data: data,
                                   ),
                                 );

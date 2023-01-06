@@ -1,8 +1,7 @@
-
 import 'package:college_shopify/controller/new_technical_entry_controller.dart';
-import 'package:college_shopify/model/technical.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
-import 'package:college_shopify/widgets/display_card_technical.dart';
+import 'package:college_shopify/widgets/display_card_product.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,16 +52,21 @@ class _DisplayTechnicalProductScreenState
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                Technical data = Technical.fromJson(
+                                Product data = Product.fromJson(
                                   controller.result[index],
                                 );
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(
-                                      () => DisplayData(userId: data.userId, productId: data.id,),
+                                      () => DisplayData(
+                                        userId: data.userId,
+                                        productId: data.productId,
+                                      ),
                                     );
                                   },
-                                  child: DisplayCardTechnical(data: data),
+                                  child: DisplayCardProduct(
+                                    data: data,
+                                  ),
                                 );
                               },
                             ),

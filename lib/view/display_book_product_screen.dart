@@ -1,7 +1,7 @@
 import 'package:college_shopify/controller/new_book_entry_controller.dart';
-import 'package:college_shopify/model/books.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
-import 'package:college_shopify/widgets/display_card_book.dart';
+import 'package:college_shopify/widgets/display_card_product.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +51,7 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                Book data = Book.fromJson(
+                                Product data = Product.fromJson(
                                   controller.result[index],
                                 );
                                 return GestureDetector(
@@ -59,11 +59,11 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
                                     Get.to(
                                       () => DisplayData(
                                         userId: widget.userID,
-                                        productId: data.id,
+                                        productId: data.productId,
                                       ),
                                     );
                                   },
-                                  child: DisplayCardBook(
+                                  child: DisplayCardProduct(
                                     data: data,
                                   ),
                                 );
