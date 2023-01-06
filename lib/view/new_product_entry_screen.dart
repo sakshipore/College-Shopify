@@ -20,7 +20,6 @@ class NewProductEntryScreen extends StatefulWidget {
 class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
   @override
   void initState() {
-    _selectedValue = _productSizesList[0];
     super.initState();
   }
 
@@ -33,8 +32,6 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
     "Technical",
     "Stationary"
   ];
-
-  String? _selectedValue = "Select Product Type";
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +74,7 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                             height: 10.h,
                           ),
                           DropdownButton(
-                            value: _selectedValue,
+                            value: controller.selectedValue,
                             items: _productSizesList
                                 .map(
                                   (e) => DropdownMenuItem(
@@ -87,9 +84,7 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                                 )
                                 .toList(),
                             onChanged: (value) {
-                              setState(() {
-                                _selectedValue = value;
-                              });
+                              controller.updateDropDown(value!);
                             },
                           ),
                           SizedBox(

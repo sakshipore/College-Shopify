@@ -24,6 +24,7 @@ class NewBookEntryController extends GetxController {
   TextEditingController productSpecificationController =
       TextEditingController();
   TextEditingController productTypeController = TextEditingController();
+  String selectedValue = "Select Product Type";
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
@@ -40,6 +41,11 @@ class NewBookEntryController extends GetxController {
       update();
       return result;
     }
+  }
+
+  void updateDropDown(String value) {
+    selectedValue = value;
+    update();
   }
 
   Future<void> insertData(var userId) async {
