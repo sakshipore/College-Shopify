@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:college_shopify/controller/login_controller.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
@@ -96,9 +98,7 @@ class SignUpScreen extends StatelessWidget {
                               );
                               _clearAll();
                               if (inserted == true) {
-                                Get.to(
-                                  () => HomeScreen(userId: userId),
-                                );
+                                log("USER ID AFTER SIGN UP : $userId");
                               } else {
                                 showSnackBar(
                                     "Error occurred", "Kindly insert again");

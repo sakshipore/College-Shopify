@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
+import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
@@ -12,8 +13,6 @@ class LoginController extends GetxController {
   var userId;
   bool inserted = false;
   bool isLoading = true;
-  
-  
 
   @override
   void onInit() {
@@ -57,6 +56,9 @@ class LoginController extends GetxController {
     if (result["Success"] == true) {
       inserted = true;
       showSnackBar("Inserted ID:", "${userId.$oid}");
+      Get.to(
+        () => HomeScreen(userId: userId),
+      );
     } else {
       inserted = false;
       showSnackBar("Error occurred", result["Msg"]);
@@ -64,6 +66,4 @@ class LoginController extends GetxController {
 
     return inserted;
   }
-
-  
 }
