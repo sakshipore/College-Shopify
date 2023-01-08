@@ -42,43 +42,43 @@ class NewTechnicalEntryController extends GetxController {
     }
   }
 
-  Future<void> insertData(var userId) async {
+  Future<void> insertData(var userId, {Product? product}) async {
     try {
       isLoading = true;
       update();
 
-      productImage =
-          await uploadProductImage(image, productNameController.text);
-      log("*************************");
-      _id = M.ObjectId();
-      log(userId.toString());
-      final data = Product(
-        productId: _id,
-        productName: productNameController.text,
-        productCost: productCostController.text,
-        productSpecification: productSpecificationController.text,
-        productType: productTypeController.text,
-        userId: userId,
-        productImage: productImage,
-      );
-      log(_id.toString());
+      // productImage =
+      //     await uploadProductImage(image, productNameController.text);
+      log("***********IN TECH**************");
+      // _id = M.ObjectId();
+      // log(userId.toString());
+      // final data = Product(
+      //   productId: _id,
+      //   productName: productNameController.text,
+      //   productCost: productCostController.text,
+      //   productSpecification: productSpecificationController.text,
+      //   productType: productTypeController.text,
+      //   userId: userId,
+      //   productImage: productImage,
+      // );
+      // log(_id.toString());
       Map<String, dynamic> result =
-          await MongoDatabaseTechnical().insert(data.toJson());
-      log(result.toString());
+          await MongoDatabaseTechnical().insert(product!.toJson());
+      log("Tech result : " + result.toString());
 
       if (result["Success"] == true) {
-        await updateData(_id, userId);
+        // await updateData(product.productId, userId);
+        log("User id before navigating : $userId");
         Get.toNamed(
           RoutesNames.homeScreen,
           arguments: userId,
         );
-        showSnackBar("Inserted ID: ", "${_id!.$oid}");
       } else {
-        showSnackBar("Error occurred", result["Msg"]);
+        showSnackBar("TECH Error occurred in else ", result["Msg"]);
       }
     } catch (e) {
       log(e.toString());
-      showSnackBar("Error occurred", e.toString());
+      showSnackBar("TECH Error occurred in catch", e.toString());
     } finally {
       isLoading = false;
       clearAll();

@@ -36,6 +36,8 @@ class NewProductEntryController extends GetxController {
   final NewTechnicalEntryController technicalEntryController =
       Get.put(NewTechnicalEntryController());
 
+  Product? lastAddedProduct;
+
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
       result = await MongoDatabaseAllProducts().getData();
@@ -59,7 +61,7 @@ class NewProductEntryController extends GetxController {
     return selectedValue;
   }
 
-  Future<void> insertData(var userId) async {
+  Future insertData(var userId) async {
     try {
       isLoading = true;
       update();
@@ -83,6 +85,7 @@ class NewProductEntryController extends GetxController {
       log(result.toString());
 
       if (result["Success"] == true) {
+        lastAddedProduct = data;
         await updateData(_id, userId);
         Get.toNamed(
           RoutesNames.homeScreen,
@@ -105,17 +108,18 @@ class NewProductEntryController extends GetxController {
   Future<void> segregateData(String value, var userId) async {
     try {
       isLoading = true;
-      log("CONTROLLER-> "+value);
+      log("CONTROLLER-> " + value);
       if (value == "Book") {
         await bookEntryController.insertData(userId);
-        log("SEGREGATED SUCCESSFULLY");
+        log("SEGREGATED SUCCESSFULLY IN BOOK");
       } else if (value == "Stationary") {
         await stationartEntryController.insertData(userId);
-        log("SEGREGATED SUCCESSFULLY");
+        log("SEGREGATED SUCCESSFULLY IN STAT");
       } else {
-        await technicalEntryController.insertData(userId);
-        log("SEGREGATED SUCCESSFULLY");
-      }      
+        await technicalEntryController.insertData(userId,
+            product: lastAddedProduct);
+        log("SEGREGATED SUCCESSFULLY IN TECH");
+      }
     } catch (e) {
       log(e.toString());
       showSnackBar("Error occurred", e.toString());
