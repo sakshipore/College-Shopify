@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:college_shopify/controller/new_book_entry_controller.dart';
+import 'package:college_shopify/controller/new_product_entry_controller.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
@@ -20,12 +21,12 @@ class NewProductEntryScreen extends StatefulWidget {
 class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
   @override
   void initState() {
-    _selectedValue = _productSizesList[0];
+    // _selectedValue = _productSizesList[0];
     super.initState();
   }
 
-  final NewBookEntryController bookEntryController =
-      Get.put(NewBookEntryController());
+  final NewProductEntryController productEntryController =
+      Get.put(NewProductEntryController());
 
   final _productSizesList = [
     "Select Product Type",
@@ -34,11 +35,11 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
     "Stationary"
   ];
 
-  String? _selectedValue = "Select Product Type";
+  // String? _selectedValue = "Select Product Type";
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewBookEntryController>(
+    return GetBuilder<NewProductEntryController>(
       builder: (controller) {
         return Scaffold(
           body: controller.isLoading
@@ -77,7 +78,8 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                             height: 10.h,
                           ),
                           DropdownButton(
-                            value: _selectedValue,
+                            // value: _selectedValue,
+                            value: controller.selectedValue,
                             items: _productSizesList
                                 .map(
                                   (e) => DropdownMenuItem(
@@ -87,9 +89,10 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                                 )
                                 .toList(),
                             onChanged: (value) {
-                              setState(() {
-                                _selectedValue = value;
-                              });
+                              // setState(() {
+                              //   _selectedValue = value;
+                              // });
+                              controller.updateDropDown(value!);
                             },
                           ),
                           SizedBox(

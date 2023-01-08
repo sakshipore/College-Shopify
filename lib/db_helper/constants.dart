@@ -4,3 +4,4 @@ const COLL_NAME = "users";
 const BOOK_COLL = "book";
 const STATIONARY_COLL = "stationary";
 const TECHNICAL_COLL = "technical";
+const ALLPRODUCTS_COLL = "all_products";
