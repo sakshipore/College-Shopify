@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:college_shopify/controller/new_book_entry_controller.dart';
@@ -34,6 +35,7 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
     "Technical",
     "Stationary"
   ];
+  String dropDownValue = "";
 
   // String? _selectedValue = "Select Product Type";
 
@@ -92,7 +94,8 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                               // setState(() {
                               //   _selectedValue = value;
                               // });
-                              controller.updateDropDown(value!);
+                              dropDownValue = controller.updateDropDown(value!);
+                              log(dropDownValue.toString());
                             },
                           ),
                           SizedBox(
@@ -137,6 +140,8 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                             text: "ADD PRODUCT",
                             onTap: () async {
                               await controller.insertData(widget.userId);
+                              controller.segregateData(
+                                  dropDownValue, widget.userId);
                             },
                           ),
                         ],

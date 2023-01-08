@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:college_shopify/controller/new_book_entry_controller.dart';
+import 'package:college_shopify/controller/new_stationary_entry_controller.dart';
+import 'package:college_shopify/controller/new_technical_entry_controller.dart';
 import 'package:college_shopify/db_helper/common_db_functions.dart';
 import 'package:college_shopify/db_helper/mongodb_all_products.dart';
 import 'package:college_shopify/db_helper/mongodb_book.dart';
@@ -26,6 +29,12 @@ class NewProductEntryController extends GetxController {
       TextEditingController();
   TextEditingController productTypeController = TextEditingController();
   String selectedValue = "Select Product Type";
+  final NewBookEntryController bookEntryController =
+      Get.put(NewBookEntryController());
+  final NewStationaryEntryController stationartEntryController =
+      Get.put(NewStationaryEntryController());
+  final NewTechnicalEntryController technicalEntryController =
+      Get.put(NewTechnicalEntryController());
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
@@ -44,9 +53,10 @@ class NewProductEntryController extends GetxController {
     }
   }
 
-  void updateDropDown(String value) {
+  String updateDropDown(String value) {
     selectedValue = value;
     update();
+    return selectedValue;
   }
 
   Future<void> insertData(var userId) async {
@@ -88,6 +98,29 @@ class NewProductEntryController extends GetxController {
     } finally {
       isLoading = false;
       clearAll();
+      update();
+    }
+  }
+
+  Future<void> segregateData(String value, var userId) async {
+    try {
+      isLoading = true;
+      log("CONTROLLER-> "+value);
+      if (value == "Book") {
+        await bookEntryController.insertData(userId);
+        log("SEGREGATED SUCCESSFULLY");
+      } else if (value == "Stationary") {
+        await stationartEntryController.insertData(userId);
+        log("SEGREGATED SUCCESSFULLY");
+      } else {
+        await technicalEntryController.insertData(userId);
+        log("SEGREGATED SUCCESSFULLY");
+      }      
+    } catch (e) {
+      log(e.toString());
+      showSnackBar("Error occurred", e.toString());
+    } finally {
+      isLoading = false;
       update();
     }
   }
