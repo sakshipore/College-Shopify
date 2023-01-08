@@ -5,6 +5,8 @@ import 'package:college_shopify/controller/book_controller.dart';
 import 'package:college_shopify/controller/stationary_controller.dart';
 import 'package:college_shopify/controller/technical_controller.dart';
 import 'package:college_shopify/db_helper/common_db_functions.dart';
+import 'package:college_shopify/db_helper/constants.dart';
+import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/db_helper/mongodb_all_products.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
@@ -34,7 +36,6 @@ class ProductEntryController extends GetxController {
       Get.put(StationaryEntryController());
   final TechnicalEntryController technicalEntryController =
       Get.put(TechnicalEntryController());
-  Product? lastAddedProduct;
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
@@ -83,12 +84,9 @@ class ProductEntryController extends GetxController {
       log(result.toString());
 
       if (result["Success"] == true) {
-        lastAddedProduct = data;
         await updateData(_id, userId);
-        Get.toNamed(
-          RoutesNames.homeScreen,
-          arguments: userId,
-        );
+        await segregateData(selectedValue, userId, data);
+        Get.toNamed(RoutesNames.homeScreen, arguments: userId);
         showSnackBar("Inserted ID: ", "${_id.$oid}");
       } else {
         showSnackBar("Error occurred", result["Msg"]);
@@ -103,20 +101,22 @@ class ProductEntryController extends GetxController {
     }
   }
 
-  Future<void> segregateData(String value, var userId) async {
+  Future<void> segregateData(String value, var userId, Product product) async {
     try {
-      isLoading = true;
-      log("CONTROLLER-> " + value);
-      log(userId.toString());
-      if (value == "Book") {
-        await bookEntryController.insertData(userId, lastAddedProduct);
-        log("SEGREGATED SUCCESSFULLY IN BOOK");
-      } else if (value == "Stationary") {
-        await stationartEntryController.insertData(userId, lastAddedProduct);
-        log("SEGREGATED SUCCESSFULLY IN STATIONARY");
-      } else if (value == "Technical") {
-        await technicalEntryController.insertData(userId, lastAddedProduct);
-        log("SEGREGATED SUCCESSFULLY IN TECH");
+      String collectionName = "";
+      if (value == "Book")
+        collectionName = BOOK_COLL;
+      else if (value == "Stationary")
+        collectionName = STATIONARY_COLL;
+      else if (value == "Technical") collectionName = TECHNICAL_COLL;
+
+      Map<String, dynamic> result = await MongoDatabase.insertByCollectionName(
+        product.toJson(),
+        collectionName,
+      );
+
+      if (result["Success"] == false) {
+        showSnackBar("Error occurred", result["Msg"]);
       }
     } catch (e) {
       log(e.toString());

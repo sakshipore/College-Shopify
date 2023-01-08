@@ -140,8 +140,6 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                             text: "ADD PRODUCT",
                             onTap: () async {
                               await controller.insertData(widget.userId);
-                              await controller.segregateData(
-                                  dropDownValue, widget.userId);
                             },
                           ),
                         ],

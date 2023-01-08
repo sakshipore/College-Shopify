@@ -47,6 +47,30 @@ class MongoDatabase {
     }
   }
 
+  static Future<Map<String, dynamic>> insertByCollectionName(
+      Map<String, dynamic> data, String collectionName) async {
+    try {
+      DbCollection collection = db.collection(collectionName);
+      var result = await collection.insertOne(data);
+      if (result.isSuccess) {
+        return {
+          "Success": true,
+          "Msg": "Data inserted",
+        };
+      } else {
+        return {
+          "Success": false,
+          "Msg": "Something went wrong",
+        };
+      }
+    } catch (e) {
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
+    }
+  }
+
   static Future<List<Map<String, dynamic>>> getData() async {
     final arrData = await usersCollection.find().toList();
     log(arrData.toString());
