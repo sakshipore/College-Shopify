@@ -1,5 +1,5 @@
 import 'package:college_shopify/view/display_products_screen.dart';
-import 'package:college_shopify/view/products_screen.dart';
+import 'package:college_shopify/view/product_entry_screen.dart';
 import 'package:college_shopify/view/profile_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/product_card.dart';
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   height: 200.h,
                   onTap: () {
                     Get.to(
-                      () => ProductsScreen(userId: userId),
+                      () => ProductEntryScreen(userId: userId),
                     );
                   },
                 ),

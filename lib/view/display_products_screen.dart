@@ -1,6 +1,5 @@
-import 'package:college_shopify/view/display_book_product_screen.dart';
-import 'package:college_shopify/view/display_stationary_product_screen.dart';
-import 'package:college_shopify/view/display_technical_product_screen.dart';
+import 'package:college_shopify/db_helper/constants.dart';
+import 'package:college_shopify/view/display_screen.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,10 @@ class DisplayProductsScreen extends StatelessWidget {
                   height: 150,
                   onTap: () {
                     Get.to(
-                      () => DisplayBookProductScreen(userID: userId,),
+                      () => DisplayScreen(
+                        userID: userId,
+                        collectionName: BOOK_COLL,
+                      ),
                     );
                   },
                 ),
@@ -47,7 +49,10 @@ class DisplayProductsScreen extends StatelessWidget {
                   height: 150,
                   onTap: () {
                     Get.to(
-                      () => DisplayStationaryProductScreen(userID: userId,),
+                      () => DisplayScreen(
+                        userID: userId,
+                        collectionName: STATIONARY_COLL,
+                      ),
                     );
                   },
                 ),
@@ -60,7 +65,10 @@ class DisplayProductsScreen extends StatelessWidget {
                   height: 150,
                   onTap: () {
                     Get.to(
-                      () => DisplayTechnicalProductScreen(userID: userId,),
+                      () => DisplayScreen(
+                        userID: userId,
+                        collectionName: TECHNICAL_COLL,
+                      ),
                     );
                   },
                 ),

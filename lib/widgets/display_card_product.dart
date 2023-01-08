@@ -41,10 +41,10 @@ class DisplayCardProduct extends StatelessWidget {
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Product Id: " + data.productId.toString()),
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                  // whiteText(text: "Product Id: " + data.productId.toString()),
+                  // SizedBox(
+                  //   height: 5.h,
+                  // ),
                   whiteText(
                       text: "Product Specification: " + data.productSpecification),
                   SizedBox(

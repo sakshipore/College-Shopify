@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:college_shopify/controller/book_controller.dart';
 import 'package:college_shopify/controller/product_controller.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
@@ -11,15 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class NewProductEntryScreen extends StatefulWidget {
+class ProductEntryScreen extends StatefulWidget {
   var userId;
-  NewProductEntryScreen({super.key, required this.userId});
+  ProductEntryScreen({super.key, required this.userId});
 
   @override
-  State<NewProductEntryScreen> createState() => _NewProductEntryScreenState();
+  State<ProductEntryScreen> createState() => _NewProductEntryScreenState();
 }
 
-class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
+class _NewProductEntryScreenState extends State<ProductEntryScreen> {
   @override
   void initState() {
     // _selectedValue = _productSizesList[0];
@@ -35,8 +34,7 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
     "Technical",
     "Stationary"
   ];
-  String dropDownValue = "";
-
+ 
   // String? _selectedValue = "Select Product Type";
 
   @override
@@ -94,8 +92,8 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                               // setState(() {
                               //   _selectedValue = value;
                               // });
-                              dropDownValue = controller.updateDropDown(value!);
-                              log(dropDownValue.toString());
+                              controller.updateDropDown(value!);
+                              // log(dropDownValue.toString());
                             },
                           ),
                           SizedBox(
@@ -140,8 +138,6 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                             text: "ADD PRODUCT",
                             onTap: () async {
                               await controller.insertData(widget.userId);
-                              await controller.segregateData(
-                                  dropDownValue, widget.userId);
                             },
                           ),
                         ],

@@ -1,4 +1,4 @@
-import 'package:college_shopify/controller/technical_controller.dart';
+import 'package:college_shopify/controller/product_controller.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
@@ -7,29 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class DisplayTechnicalProductScreen extends StatefulWidget {
+class DisplayScreen extends StatefulWidget {
   var userID;
-  DisplayTechnicalProductScreen({super.key, required this.userID});
+  String collectionName;
+  DisplayScreen({super.key, required this.userID, required this.collectionName});
 
   @override
-  State<DisplayTechnicalProductScreen> createState() =>
-      _DisplayTechnicalProductScreenState();
+  State<DisplayScreen> createState() => _DisplayBookProductScreenState();
 }
 
-class _DisplayTechnicalProductScreenState
-    extends State<DisplayTechnicalProductScreen> {
-  final TechnicalEntryController technicalEntryController =
-      Get.put(TechnicalEntryController());
+class _DisplayBookProductScreenState extends State<DisplayScreen> {
+  final ProductEntryController productController =
+      Get.put(ProductEntryController());
 
   @override
   void initState() {
-    technicalEntryController.displayData();
+    productController.displayCollectionData(widget.collectionName);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TechnicalEntryController>(
+    return GetBuilder<ProductEntryController>(
       builder: (controller) {
         return Scaffold(
           body: SingleChildScrollView(
@@ -59,7 +58,7 @@ class _DisplayTechnicalProductScreenState
                                   onTap: () {
                                     Get.to(
                                       () => DisplayData(
-                                        userId: data.userId,
+                                        userId: widget.userID,
                                         productId: data.productId,
                                       ),
                                     );
