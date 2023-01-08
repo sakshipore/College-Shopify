@@ -47,6 +47,7 @@ class MongoDatabaseStationary {
   }
 
   Future<List<Map<String, dynamic>>> getData() async {
+    log("GETTING DATA");
     final arrData = await stationaryCollection.find().toList();
     log(arrData.toString());
     return arrData;

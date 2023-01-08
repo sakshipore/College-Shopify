@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:college_shopify/controller/new_book_entry_controller.dart';
-import 'package:college_shopify/controller/new_product_entry_controller.dart';
+import 'package:college_shopify/controller/book_controller.dart';
+import 'package:college_shopify/controller/product_controller.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/heading_text.dart';
@@ -26,8 +26,8 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
     super.initState();
   }
 
-  final NewProductEntryController productEntryController =
-      Get.put(NewProductEntryController());
+  final ProductEntryController productEntryController =
+      Get.put(ProductEntryController());
 
   final _productSizesList = [
     "Select Product Type",
@@ -41,7 +41,7 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewProductEntryController>(
+    return GetBuilder<ProductEntryController>(
       builder: (controller) {
         return Scaffold(
           body: controller.isLoading
@@ -140,7 +140,7 @@ class _NewProductEntryScreenState extends State<NewProductEntryScreen> {
                             text: "ADD PRODUCT",
                             onTap: () async {
                               await controller.insertData(widget.userId);
-                              controller.segregateData(
+                              await controller.segregateData(
                                   dropDownValue, widget.userId);
                             },
                           ),

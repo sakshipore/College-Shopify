@@ -1,4 +1,4 @@
-import 'package:college_shopify/controller/new_book_entry_controller.dart';
+import 'package:college_shopify/controller/book_controller.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
@@ -17,8 +17,8 @@ class DisplayBookProductScreen extends StatefulWidget {
 }
 
 class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
-  final NewBookEntryController bookEntryController =
-      Get.put(NewBookEntryController());
+  final BookEntryController bookEntryController =
+      Get.put(BookEntryController());
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _DisplayBookProductScreenState extends State<DisplayBookProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewBookEntryController>(
+    return GetBuilder<BookEntryController>(
       builder: (controller) {
         return Scaffold(
           body: SingleChildScrollView(

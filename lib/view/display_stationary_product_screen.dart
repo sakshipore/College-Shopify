@@ -1,4 +1,4 @@
-import 'package:college_shopify/controller/new_stationary_entry_controller.dart';
+import 'package:college_shopify/controller/stationary_controller.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
@@ -18,8 +18,8 @@ class DisplayStationaryProductScreen extends StatefulWidget {
 
 class _DisplayStationaryProductScreenState
     extends State<DisplayStationaryProductScreen> {
-  final NewStationaryEntryController stationaryEntryController =
-      Get.put(NewStationaryEntryController());
+  final StationaryEntryController stationaryEntryController =
+      Get.put(StationaryEntryController());
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _DisplayStationaryProductScreenState
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewStationaryEntryController>(
+    return GetBuilder<StationaryEntryController>(
       builder: (controller) {
         return Scaffold(
           body: SingleChildScrollView(

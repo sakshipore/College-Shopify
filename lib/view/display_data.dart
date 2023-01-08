@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:college_shopify/controller/new_entry_controller.dart';
+import 'package:college_shopify/controller/entry_controller.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/display_card_data.dart';
@@ -19,7 +19,7 @@ class DisplayData extends StatefulWidget {
 }
 
 class _DisplayDataState extends State<DisplayData> {
-  final NewEntryController newEntryController = Get.put(NewEntryController());
+  final EntryController newEntryController = Get.put(EntryController());
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _DisplayDataState extends State<DisplayData> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewEntryController>(
+    return GetBuilder<EntryController>(
       builder: (controller) {
         return Scaffold(
           body: (controller.isDisplayDataLoading ||

@@ -1,4 +1,4 @@
-import 'package:college_shopify/controller/new_technical_entry_controller.dart';
+import 'package:college_shopify/controller/technical_controller.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
@@ -18,8 +18,8 @@ class DisplayTechnicalProductScreen extends StatefulWidget {
 
 class _DisplayTechnicalProductScreenState
     extends State<DisplayTechnicalProductScreen> {
-  final NewTechnicalEntryController technicalEntryController =
-      Get.put(NewTechnicalEntryController());
+  final TechnicalEntryController technicalEntryController =
+      Get.put(TechnicalEntryController());
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _DisplayTechnicalProductScreenState
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewTechnicalEntryController>(
+    return GetBuilder<TechnicalEntryController>(
       builder: (controller) {
         return Scaffold(
           body: SingleChildScrollView(

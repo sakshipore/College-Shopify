@@ -1,8 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:college_shopify/controller/book_controller.dart';
+import 'package:college_shopify/controller/stationary_controller.dart';
+import 'package:college_shopify/controller/technical_controller.dart';
 import 'package:college_shopify/db_helper/common_db_functions.dart';
-import 'package:college_shopify/db_helper/mongodb_book.dart';
+import 'package:college_shopify/db_helper/mongodb_all_products.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/utils/pick_image.dart';
@@ -11,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
-class NewBookEntryController extends GetxController {
+class ProductEntryController extends GetxController {
   // final Rx<List<Book>> book = Rx<List<Book>>([]);
   var _id;
   bool isLoading = false;
@@ -25,10 +28,17 @@ class NewBookEntryController extends GetxController {
       TextEditingController();
   TextEditingController productTypeController = TextEditingController();
   String selectedValue = "Select Product Type";
+  final BookEntryController bookEntryController =
+      Get.put(BookEntryController());
+  final StationaryEntryController stationartEntryController =
+      Get.put(StationaryEntryController());
+  final TechnicalEntryController technicalEntryController =
+      Get.put(TechnicalEntryController());
+  Product? lastAddedProduct;
 
   Future<List<Map<String, dynamic>>> displayData() async {
     try {
-      result = await MongoDatabaseBook().getData();
+      result = await MongoDatabaseAllProducts().getData();
       int totalLength = result.length;
       log(totalLength.toString());
       isDisplayLoading = false;
@@ -43,12 +53,13 @@ class NewBookEntryController extends GetxController {
     }
   }
 
-  void updateDropDown(String value) {
+  String updateDropDown(String value) {
     selectedValue = value;
     update();
+    return selectedValue;
   }
 
-  Future<void> insertData(var userId) async {
+  Future insertData(var userId) async {
     try {
       isLoading = true;
       update();
@@ -68,10 +79,11 @@ class NewBookEntryController extends GetxController {
       );
 
       Map<String, dynamic> result =
-          await MongoDatabaseBook().insert(data.toJson());
+          await MongoDatabaseAllProducts().insert(data.toJson());
       log(result.toString());
 
       if (result["Success"] == true) {
+        lastAddedProduct = data;
         await updateData(_id, userId);
         Get.toNamed(
           RoutesNames.homeScreen,
@@ -87,6 +99,30 @@ class NewBookEntryController extends GetxController {
     } finally {
       isLoading = false;
       clearAll();
+      update();
+    }
+  }
+
+  Future<void> segregateData(String value, var userId) async {
+    try {
+      isLoading = true;
+      log("CONTROLLER-> " + value);
+      log(userId.toString());
+      if (value == "Book") {
+        await bookEntryController.insertData(userId, lastAddedProduct);
+        log("SEGREGATED SUCCESSFULLY IN BOOK");
+      } else if (value == "Stationary") {
+        await stationartEntryController.insertData(userId, lastAddedProduct);
+        log("SEGREGATED SUCCESSFULLY IN STATIONARY");
+      } else if (value == "Technical") {
+        await technicalEntryController.insertData(userId, lastAddedProduct);
+        log("SEGREGATED SUCCESSFULLY IN TECH");
+      }
+    } catch (e) {
+      log(e.toString());
+      showSnackBar("Error occurred", e.toString());
+    } finally {
+      isLoading = false;
       update();
     }
   }

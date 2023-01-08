@@ -47,6 +47,7 @@ class MongoDatabaseTechnical {
   }
 
   Future<List<Map<String, dynamic>>> getData() async {
+    log("GETIING DATA");
     final arrData = await technicalCollection.find().toList();
     log(arrData.toString());
     return arrData;
