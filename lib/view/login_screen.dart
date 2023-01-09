@@ -1,10 +1,9 @@
+import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/login_controller.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/view/signup_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
-import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 50.h,
                         ),
-                        headingText(text: "Login"),
+                        Text("Login", style: MyTextStyle.headingLatoFont),
                         SizedBox(
                           height: 75.h,
                         ),
@@ -69,7 +68,10 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: Padding(
                             padding: EdgeInsets.only(left: 175.w),
-                            child: normalText(text: "Don't have an account?"),
+                            child: Text(
+                              "Don't have an account?",
+                              style: MyTextStyle.normalLatoFont,
+                            ),
                           ),
                         ),
                         SizedBox(

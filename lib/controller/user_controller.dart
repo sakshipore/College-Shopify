@@ -6,7 +6,7 @@ import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:get/get.dart';
 
-class EntryController extends GetxController {
+class UserController extends GetxController {
   final Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
 
   bool isDisplayDataLoading = true;

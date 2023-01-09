@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:college_shopify/db_helper/common_db_functions.dart';
 import 'package:college_shopify/db_helper/constants.dart';
 import 'package:college_shopify/db_helper/mongodb.dart';
-import 'package:college_shopify/db_helper/mongodb_all_products.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/utils/pick_image.dart';
@@ -28,9 +27,9 @@ class ProductEntryController extends GetxController {
   TextEditingController productTypeController = TextEditingController();
   String selectedValue = "Select Product Type";
 
-  Future<List<Map<String, dynamic>>> displayData() async {
+  Future<List<Map<String, dynamic>>> displayData(String collectionName) async {
     try {
-      result = await MongoDatabaseAllProducts().getData();
+      result = await MongoDatabase.getCollectionData(collectionName);
       int totalLength = result.length;
       log(totalLength.toString());
       isDisplayLoading = false;
@@ -89,7 +88,7 @@ class ProductEntryController extends GetxController {
       );
 
       Map<String, dynamic> result =
-          await MongoDatabaseAllProducts().insert(data.toJson());
+          await MongoDatabase.insertByCollectionName(data.toJson(), ALLPRODUCTS_COLL);
       log(result.toString());
 
       if (result["Success"] == true) {

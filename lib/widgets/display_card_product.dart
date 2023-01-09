@@ -1,5 +1,5 @@
+import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/model/products.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,20 +37,24 @@ class DisplayCardProduct extends StatelessWidget {
                   // SizedBox(
                   //   height: 5.h,
                   // ),
-                  whiteText(text: "Product Name: " + data.productName),
+                  Text(
+                    "Product Name: " + data.productName,
+                    style: MyTextStyle.whiteLatoFont,
+                  ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  // whiteText(text: "Product Id: " + data.productId.toString()),
-                  // SizedBox(
-                  //   height: 5.h,
-                  // ),
-                  whiteText(
-                      text: "Product Specification: " + data.productSpecification),
+                  Text(
+                    "Product Specification: " + data.productSpecification,
+                    style: MyTextStyle.whiteLatoFont,
+                  ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Product Cost: " + data.productCost),
+                  Text(
+                    "Product Cost: " + data.productCost,
+                    style: MyTextStyle.whiteLatoFont,
+                  ),
                   SizedBox(
                     height: 5.h,
                   ),

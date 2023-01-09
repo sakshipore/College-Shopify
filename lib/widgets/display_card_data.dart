@@ -1,5 +1,5 @@
+import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,28 +15,34 @@ class DisplayCardData extends StatelessWidget {
         SizedBox(
           height: 50.h,
         ),
-        normalText(text: "User id: " + data.id.$oid),
+        Text(
+          "User id: " + data.id.$oid,
+          style: MyTextStyle.normalLatoFont,
+        ),
         SizedBox(
           height: 10.h,
         ),
-        normalText(text: "Name: " + data.fname + " " + data.lname),
+        Text(
+          "Name: " + data.fname + " " + data.lname,
+          style: MyTextStyle.normalLatoFont,
+        ),
         SizedBox(
           height: 10.h,
         ),
-        normalText(text: "Address: " + data.address),
+        Text(
+          "Address: " + data.address,
+          style: MyTextStyle.normalLatoFont,
+        ),
         SizedBox(
           height: 10.h,
         ),
-        normalText(text: "Mobile no.: " + data.mobNo),
+        Text(
+          "Mobile no.: " + data.mobNo,
+          style: MyTextStyle.normalLatoFont,
+        ),
         SizedBox(
           height: 30.h,
         ),
-        // Button(
-        //   text: "BUY PRODUCT",
-        //   onTap: () {
-        //     Navigator.pop(context);
-        //   },
-        // )
       ],
     );
   }

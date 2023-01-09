@@ -1,5 +1,5 @@
+import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/profile_controller.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -32,28 +32,41 @@ class _DisplayCardProfileState extends State<DisplayCardProfile> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  normalText(
-                      text: "User id: " + controller.data!.id.toString()),
+                  Text(
+                    "User id: " + controller.data!.id.toString(),
+                    style: MyTextStyle.normalLatoFont,
+                  ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  normalText(
-                      text: "Name: " +
-                          controller.data!.fname +
-                          " " +
-                          controller.data!.lname),
+                  Text(
+                    "Name: " +
+                        controller.data!.fname +
+                        " " +
+                        controller.data!.lname,
+                    style: MyTextStyle.normalLatoFont,
+                  ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  normalText(text: "Address: " + controller.data!.address),
+                  Text(
+                    "Address: " + controller.data!.address,
+                    style: MyTextStyle.normalLatoFont,
+                  ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  normalText(text: "Mobile no.: " + controller.data!.mobNo),
+                  Text(
+                    "Mobile no.: " + controller.data!.mobNo,
+                    style: MyTextStyle.normalLatoFont,
+                  ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  normalText(text: "Products uploaded: "),
+                  Text(
+                    "Products uploaded: ",
+                    style: MyTextStyle.normalLatoFont,
+                  ),
                   ListView.builder(
                     itemCount: controller.data!.product.length,
                     shrinkWrap: true,
@@ -68,7 +81,10 @@ class _DisplayCardProfileState extends State<DisplayCardProfile> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  normalText(text: "Products bought: "),
+                  Text(
+                    "Products bought: ",
+                    style: MyTextStyle.normalLatoFont,
+                  ),
                   ListView.builder(
                     itemCount: 5,
                     shrinkWrap: true,

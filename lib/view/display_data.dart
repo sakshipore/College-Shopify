@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:college_shopify/controller/entry_controller.dart';
+import 'package:college_shopify/constants/text_style.dart';
+import 'package:college_shopify/controller/user_controller.dart';
 import 'package:college_shopify/model/mongodb_model.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/display_card_data.dart';
-import 'package:college_shopify/widgets/heading_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +19,7 @@ class DisplayData extends StatefulWidget {
 }
 
 class _DisplayDataState extends State<DisplayData> {
-  final EntryController newEntryController = Get.put(EntryController());
+  final UserController newEntryController = Get.put(UserController());
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _DisplayDataState extends State<DisplayData> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<EntryController>(
+    return GetBuilder<UserController>(
       builder: (controller) {
         return Scaffold(
           body: (controller.isDisplayDataLoading ||
@@ -45,7 +45,8 @@ class _DisplayDataState extends State<DisplayData> {
                         SizedBox(
                           height: 100.h,
                         ),
-                        headingText(text: "Seller Details"),
+                        Text("Seller Details",
+                            style: MyTextStyle.headingLatoFont),
                         Container(
                           child: DisplayCardData(
                             data: MongoDBModel.fromJson(controller.result!),

@@ -1,11 +1,9 @@
-import 'dart:developer';
 import 'dart:io';
 
+import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/product_controller.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
-import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,7 +19,6 @@ class ProductEntryScreen extends StatefulWidget {
 class _NewProductEntryScreenState extends State<ProductEntryScreen> {
   @override
   void initState() {
-    // _selectedValue = _productSizesList[0];
     super.initState();
   }
 
@@ -34,8 +31,6 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
     "Technical",
     "Stationary"
   ];
- 
-  // String? _selectedValue = "Select Product Type";
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +53,10 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
                           SizedBox(
                             height: 50.h,
                           ),
-                          headingText(text: "Product"),
+                          Text(
+                            "Product",
+                            style: MyTextStyle.headingLatoFont,
+                          ),
                           SizedBox(
                             height: 75.h,
                           ),
@@ -122,7 +120,11 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
                                   borderRadius: BorderRadius.circular(8.r),
                                   child: controller.image == null
                                       ? Center(
-                                          child: normalText(text: "Add Image"))
+                                          child: Text(
+                                            "Add Image",
+                                            style: MyTextStyle.normalLatoFont,
+                                          ),
+                                        )
                                       : Image.file(
                                           File(controller.image!.path),
                                           fit: BoxFit.cover,
