@@ -108,6 +108,18 @@ class MongoDatabase {
     }
   }
 
+  static Future<Map<String, dynamic>?> fetchProductData(var productId) async {
+    Map<String, dynamic>? userData;
+    DbCollection allProductCollection = db.collection(ALLPRODUCTS_COLL);
+    userData = await allProductCollection.findOne({'productId': productId});
+    if (userData == null) {
+      return null;
+    } else {
+      log(userData.toString());
+      return userData;
+    }
+  }
+
   static Future<Map<String, dynamic>> update(
       var userId, List productIds) async {
     try {
