@@ -6,7 +6,6 @@ import 'package:college_shopify/view/display_products_screen.dart';
 import 'package:college_shopify/view/product_entry_screen.dart';
 import 'package:college_shopify/view/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   var userId;
@@ -61,28 +60,24 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                size: 25.h,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.sell_sharp,
-                size: 25.h,
               ),
               label: 'Sell Product',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.shopping_cart,
-                size: 25.h,
               ),
               label: 'Buy Product',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                size: 25.h,
               ),
               label: 'Profile',
             ),

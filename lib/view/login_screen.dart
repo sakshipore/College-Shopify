@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 50.h,
+                          height: 100.h,
                         ),
                         Text("Login", style: MyTextStyle.headingLatoFont),
                         SizedBox(
@@ -66,12 +66,12 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                         SizedBox(
-                          height: 16.h,
+                          height: 20.h,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(
-                              () => SignUpScreen(),
+                            Get.toNamed(
+                              RoutesNames.signUpScreen,
                             );
                           },
                           child: Padding(
@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 50.h,
+                          height: 100.h,
                         ),
                         Button(
                           text: "LOGIN",

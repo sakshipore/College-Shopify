@@ -1,5 +1,6 @@
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/db_helper/constants.dart';
+import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/view/display_screen.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,12 @@ class DisplayProductsScreen extends StatelessWidget {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
-                    Get.to(
-                      () => DisplayScreen(
-                        userID: userId,
-                        collectionName: BOOK_COLL,
-                      ),
+                    Get.toNamed(
+                      RoutesNames.displayProductsScreen,
+                      arguments: {
+                        "userID": userId,
+                        "collectionName": BOOK_COLL,
+                      },
                     );
                   },
                 ),
@@ -48,11 +50,12 @@ class DisplayProductsScreen extends StatelessWidget {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
-                    Get.to(
-                      () => DisplayScreen(
-                        userID: userId,
-                        collectionName: STATIONARY_COLL,
-                      ),
+                    Get.toNamed(
+                      RoutesNames.displayProductsScreen,
+                      arguments: {
+                        "userID": userId,
+                        "collectionName": STATIONARY_COLL,
+                      },
                     );
                   },
                 ),
@@ -64,11 +67,12 @@ class DisplayProductsScreen extends StatelessWidget {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
-                    Get.to(
-                      () => DisplayScreen(
-                        userID: userId,
-                        collectionName: TECHNICAL_COLL,
-                      ),
+                    Get.toNamed(
+                      RoutesNames.displayProductsScreen,
+                      arguments: {
+                        "userID": userId,
+                        "collectionName": TECHNICAL_COLL,
+                      },
                     );
                   },
                 ),

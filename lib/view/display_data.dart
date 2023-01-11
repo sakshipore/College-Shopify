@@ -35,7 +35,9 @@ class _DisplayDataState extends State<DisplayData> {
           body: (controller.isDisplayDataLoading ||
                   controller.isboughtProductLoading)
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Color(0xff2140B1),
+                  ),
                 )
               : SingleChildScrollView(
                   child: Padding(

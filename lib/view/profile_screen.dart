@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/profile_controller.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
@@ -30,7 +28,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (controller) {
         return controller.isLoading
             ? Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Color(0xff2140B1),
+                ),
               )
             : Scaffold(
                 body: SafeArea(

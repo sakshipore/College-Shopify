@@ -47,7 +47,7 @@ class SignUpScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 50.h,
+                            height: 100.h,
                           ),
                           Text(
                             "Sign Up",
@@ -81,7 +81,7 @@ class SignUpScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(
-                            height: 16.h,
+                            height: 20.h,
                           ),
                           GestureDetector(
                             onTap: () {
