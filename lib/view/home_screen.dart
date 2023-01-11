@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/view/all_products_screen.dart';
 import 'package:college_shopify/view/display_products_screen.dart';
@@ -26,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    log("IN HOME SCREEN : " + widget.userId.toString());
     listOfPages = [
       AllProductsScreen(userID: widget.userId),
       ProductEntryScreen(userId: widget.userId),
@@ -59,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 Icons.home,
                 size: 25.h,
-                
               ),
               label: 'Home',
             ),
@@ -67,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 Icons.sell_sharp,
                 size: 25.h,
-                
               ),
               label: 'Sell Product',
             ),
@@ -75,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 Icons.shopping_cart,
                 size: 25.h,
-                
               ),
               label: 'Buy Product',
             ),

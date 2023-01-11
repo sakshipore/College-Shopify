@@ -25,7 +25,7 @@ class ProductEntryController extends GetxController {
   TextEditingController productSpecificationController =
       TextEditingController();
   TextEditingController productTypeController = TextEditingController();
-  String selectedValue = "Select Product Type";
+  String? selectedValue;
 
   Future<List<Map<String, dynamic>>> displayData(String collectionName) async {
     try {
@@ -33,6 +33,7 @@ class ProductEntryController extends GetxController {
       int totalLength = result.length;
       log(totalLength.toString());
       isDisplayLoading = false;
+      result.shuffle();
       update();
       return result;
     } catch (e) {
@@ -87,18 +88,20 @@ class ProductEntryController extends GetxController {
         productImage: productImage,
       );
 
-      Map<String, dynamic> result =
-          await MongoDatabase.insertByCollectionName(data.toJson(), ALLPRODUCTS_COLL);
+      Map<String, dynamic> result = await MongoDatabase.insertByCollectionName(
+          data.toJson(), ALLPRODUCTS_COLL);
       log(result.toString());
 
       if (result["Success"] == true) {
         await updateData(_id, userId);
-        await segregateData(selectedValue, userId, data);
+        await segregateData(selectedValue!, userId, data);
         Get.toNamed(
           RoutesNames.homeScreen,
           arguments: userId,
         );
         showSnackBar("Inserted ID: ", "${_id.$oid}");
+        image = null;
+        selectedValue = null;
       } else {
         showSnackBar("Error occurred", result["Msg"]);
       }

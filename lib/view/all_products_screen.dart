@@ -43,7 +43,9 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                               child: CircularProgressIndicator(),
                             )
                           : ListView.builder(
-                              itemCount: controller.result.length,
+                              itemCount: controller.result.length > 10
+                                  ? 10
+                                  : controller.result.length,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) {

@@ -1,5 +1,6 @@
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/login_controller.dart';
+import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/view/home_screen.dart';
 import 'package:college_shopify/view/signup_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
@@ -56,7 +57,14 @@ class LoginScreen extends StatelessWidget {
                           height: 75.h,
                         ),
                         FormText(
-                            text: "Mobile No", controller: mobNoController),
+                          text: "Mobile No",
+                          controller: mobNoController,
+                          onChanged: (value) {
+                            if (value.length == 10) {
+                              FocusScope.of(context).unfocus();
+                            }
+                          },
+                        ),
                         SizedBox(
                           height: 16.h,
                         ),
@@ -80,20 +88,27 @@ class LoginScreen extends StatelessWidget {
                         Button(
                           text: "LOGIN",
                           onTap: () async {
-                            var userData = await controller
-                                .checkUser(mobNoController.text);
-                            if (userData == null) {
-                              showSnackBar(
-                                  "Error occurred", "User doesn't exist !");
-                              Get.to(
-                                () => SignUpScreen(),
-                              );
+                            if (mobNoController.text.length == 10) {
+                              var userData = await controller
+                                  .checkUser(mobNoController.text);
+                              if (userData == null) {
+                                showSnackBar(
+                                    "Error occurred", "User doesn't exist !");
+                                Get.to(
+                                  () => SignUpScreen(),
+                                );
+                              } else {
+                                userId = userData['id'];
+                                showSnackBar(
+                                    "User exists: ", userId.toString());
+                                Get.offAllNamed(
+                                  RoutesNames.homeScreen,
+                                  arguments: userId,
+                                );
+                              }
                             } else {
-                              userId = userData['id'];
-                              showSnackBar("User exists: ", userId.toString());
-                              Get.to(
-                                () => HomeScreen(userId: userId),
-                              );
+                              showSnackBar(
+                                  "Error occurred", "Enter valid number");
                             }
                           },
                         ),

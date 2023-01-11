@@ -19,6 +19,7 @@ class ProfileController extends GetxController {
   Future<void> profileData(var userId) async {
     try {
       result = await MongoDatabase.fetchUserData(userId);
+      log(result.toString());
       data = MongoDBModel.fromJson(result!);
       log("PROFILE DATA: " + data.toString());
 

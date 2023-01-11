@@ -25,12 +25,7 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
   final ProductEntryController productEntryController =
       Get.put(ProductEntryController());
 
-  final _productSizesList = [
-    "Select Product Type",
-    "Book",
-    "Technical",
-    "Stationary"
-  ];
+  final _productSizesList = ["Book", "Technical", "Stationary"];
 
   @override
   Widget build(BuildContext context) {
@@ -75,27 +70,52 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          DropdownButton(
-                            // value: _selectedValue,
-                            value: controller.selectedValue,
-                            items: _productSizesList
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    child: Text(e),
-                                    value: e,
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (value) {
-                              // setState(() {
-                              //   _selectedValue = value;
-                              // });
-                              controller.updateDropDown(value!);
-                              // log(dropDownValue.toString());
-                            },
-                          ),
+                          // DropdownButton(
+                          //   // value: _selectedValue,
+                          //   value: controller.selectedValue,
+                          //   items: _productSizesList
+                          //       .map(
+                          //         (e) => DropdownMenuItem(
+                          //           child: Text(e),
+                          //           value: e,
+                          //         ),
+                          //       )
+                          //       .toList(),
+                          //   onChanged: (value) {
+                          //     // setState(() {
+                          //     //   _selectedValue = value;
+                          //     // });
+                          //     controller.updateDropDown(value!);
+                          //     // log(dropDownValue.toString());
+                          //   },
+                          // ),
                           SizedBox(
-                            height: 10.h,
+                            height: 45.h,
+                            width: 330.w,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                items: _productSizesList
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        child: Text(e),
+                                        value: e,
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  controller.updateDropDown(value!);
+                                },
+                                value: controller.selectedValue,
+                                hint: Text(
+                                  "Select Product Type",
+                                  style: MyTextStyle.normalLatoFont.copyWith(
+                                    fontSize: 14.sp,
+                                    color: Color(0xff9B9B9B),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                           FormText(
                             text: "Product Cost",
