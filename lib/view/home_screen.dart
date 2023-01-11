@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     listOfPages = [
-      AllProductsScreen(userId: widget.userId),
+      AllProductsScreen(userID: widget.userId),
       ProductEntryScreen(userId: widget.userId),
       DisplayProductsScreen(userId: widget.userId),
       ProfileScreen(userId: widget.userId),

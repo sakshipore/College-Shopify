@@ -44,24 +44,24 @@ class ProductEntryController extends GetxController {
     }
   }
 
-  Future<List<Map<String, dynamic>>> displayCollectionData(
-      String collectionName) async {
-    try {
-      result = await MongoDatabase.getCollectionData(collectionName);
-      log(collectionName);
-      int totalLength = result.length;
-      log(totalLength.toString());
-      isDisplayLoading = false;
-      update();
-      return result;
-    } catch (e) {
-      log(e.toString());
-      showSnackBar("Error occurred", e.toString());
-      isDisplayLoading = false;
-      update();
-      return result;
-    }
-  }
+  // Future<List<Map<String, dynamic>>> displayCollectionData(
+  //     String collectionName) async {
+  //   try {
+  //     result = await MongoDatabase.getCollectionData(collectionName);
+  //     log(collectionName);
+  //     int totalLength = result.length;
+  //     log(totalLength.toString());
+  //     isDisplayLoading = false;
+  //     update();
+  //     return result;
+  //   } catch (e) {
+  //     log(e.toString());
+  //     showSnackBar("Error occurred", e.toString());
+  //     isDisplayLoading = false;
+  //     update();
+  //     return result;
+  //   }
+  // }
 
   void updateDropDown(String value) {
     selectedValue = value;
