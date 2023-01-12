@@ -58,6 +58,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
+                              // TODO : Dont need to do this when list is of type List<Product>
                               Product data = Product.fromJson(
                                 controller.result[index],
                               );

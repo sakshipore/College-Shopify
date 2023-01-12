@@ -19,6 +19,7 @@ class ProductEntryController extends GetxController {
   bool isDisplayLoading = true;
   String productImage = "";
   File? image;
+  // TODO : Make it List<Products> for that use Product.fromJson() for each item in displayData function
   List<Map<String, dynamic>> result = [];
   TextEditingController productNameController = TextEditingController();
   TextEditingController productCostController = TextEditingController();
@@ -143,6 +144,7 @@ class ProductEntryController extends GetxController {
 
   Future<void> updateBoughtData(var userId, var productId) async {
     try {
+      // TODO : Waaah
       await updateBoughtData(userId, productId);
       Get.toNamed(
         RoutesNames.homeScreen,
@@ -156,20 +158,21 @@ class ProductEntryController extends GetxController {
   }
 
   clearAll() {
+    // TODO : make productNameController.clear()
     productNameController.text = "";
     productCostController.text = "";
     productSpecificationController.text = "";
     productTypeController.text = "";
   }
 
+  // TODO : Give return type
   selectImage() async {
     File? temp = await pickImage();
     if (temp != null) {
       image = temp;
       update();
+    } else {
+      showSnackBar("Error occurred", "Image was not picked");
     }
-    //else {
-    //   showSnackBar("Error occurred", "Image was not picked");
-    // }
   }
 }

@@ -7,6 +7,8 @@ import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
+// TODO : Name should be AuthController
+
 class LoginController extends GetxController {
   final Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
 
@@ -27,6 +29,7 @@ class LoginController extends GetxController {
     update();
   }
 
+  // TODO : Return type will change when logic will be moved in controller (Make it void)
   Future<Map<String, dynamic>?> checkUser(String mobNo) async {
     Map<String, dynamic>? userData;
     userData = await MongoDatabase.usersCollection.findOne({'mobNo': mobNo});
@@ -38,6 +41,7 @@ class LoginController extends GetxController {
     }
   }
 
+// TODO Parameters will change after shifting TextEditingController in AuthContoller
   Future<bool> insertData(
       String fname, String lname, String address, String mobNo) async {
     userId = M.ObjectId();
@@ -56,6 +60,7 @@ class LoginController extends GetxController {
     if (result["Success"] == true) {
       inserted = true;
       showSnackBar("Inserted ID:", "${userId.$oid}");
+      // TODO : Named routes
       Get.to(
         () => HomeScreen(
           userId: userId,

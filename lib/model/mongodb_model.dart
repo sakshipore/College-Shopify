@@ -7,6 +7,7 @@ MongoDBModel mongoDBModelfromJson(String str) =>
 
 String mongoDBModeltoJson(MongoDBModel data) => json.encode(data.toJson());
 
+// TODO : Change name
 class MongoDBModel {
   ObjectId id;
   String address;

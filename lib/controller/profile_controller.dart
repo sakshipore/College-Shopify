@@ -12,6 +12,7 @@ class ProfileController extends GetxController {
   Map<String, dynamic>? result = {};
   bool isLoading = true;
   bool isDisplayLoading = true;
+  // TODO : Rename it to user
   MongoDBModel? data;
   List<Product> uploadedProducts = [];
   List<Product> boughtProducts = [];

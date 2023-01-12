@@ -5,6 +5,7 @@ import 'package:college_shopify/db_helper/mongodb.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+// TODO : Change the name of function
 Future<void> updateData(var productId, var userId) async {
   Map<String, dynamic>? userData = await MongoDatabase.fetchUserData(userId);
 
@@ -29,7 +30,7 @@ Future<void> updateBoughtProducts(var productId, var userId) async {
   List productIds = userData["boughtProducts"];
   productIds.add(productId);
   var result = await MongoDatabase.updateBuyProduct(userId, productIds);
-  log("Update Response: "+result.toString());
+  log("Update Response: " + result.toString());
 
   if (result["Success"] == false) {
     showSnackBar("Error occurred", result["Msg"]);

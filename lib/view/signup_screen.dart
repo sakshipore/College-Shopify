@@ -13,12 +13,13 @@ import 'package:get/get.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
+  final userController = Get.put(LoginController());
+  var userId;
+  // TODO : Move to controller and make textEditingCotrollers final
   TextEditingController addressController = TextEditingController();
   TextEditingController fnameController = TextEditingController();
   TextEditingController lnameController = TextEditingController();
   TextEditingController mobNoController = TextEditingController();
-  final userController = Get.put(LoginController());
-  var userId;
   bool inserted = false;
 
   void _clearAll() {
@@ -101,6 +102,7 @@ class SignUpScreen extends StatelessWidget {
                           Button(
                             text: "SIGN UP",
                             onTap: () async {
+                              // TODO : Move all logic in controller
                               if (mobNoController.text.length == 10 &&
                                   fnameController.text != "" &&
                                   lnameController.text != "" &&

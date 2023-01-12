@@ -55,6 +55,7 @@ class _DisplayBookProductScreenState extends State<DisplayScreen> {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
+                              // TODO : Will change when List will be of type List<Product>
                               Product data = Product.fromJson(
                                 controller.result[index],
                               );

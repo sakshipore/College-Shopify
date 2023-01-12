@@ -88,12 +88,14 @@ class LoginScreen extends StatelessWidget {
                         Button(
                           text: "LOGIN",
                           onTap: () async {
+                            // TODO: Move all this login in controller
                             if (mobNoController.text.length == 10) {
                               var userData = await controller
                                   .checkUser(mobNoController.text);
                               if (userData == null) {
                                 showSnackBar(
                                     "Error occurred", "User doesn't exist !");
+                                // TODO : Named routes
                                 Get.to(
                                   () => SignUpScreen(),
                                 );

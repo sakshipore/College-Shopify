@@ -25,6 +25,7 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
   final ProductEntryController productEntryController =
       Get.put(ProductEntryController());
 
+  // TODO : Shift to ProductEntryController
   final _productSizesList = ["Book", "Technical", "Stationary"];
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayCardProduct extends StatelessWidget {
+  // TODO : make it final
   Product data;
   DisplayCardProduct({super.key, required this.data});
 
