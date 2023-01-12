@@ -27,13 +27,15 @@ class ProductEntryController extends GetxController {
   String? selectedValue;
   final productSizesList = ["Book", "Technical", "Stationary"];
 
-  Future<void> displayData(String collectionName) async {
+  Future<void> displayData(String collectionName, {var userId}) async {
     try {
       List<Map<String, dynamic>> res =
           await MongoDatabase.getCollectionData(collectionName);
       result.clear();
       for (Map<String, dynamic> item in res) {
-        result.add(Product.fromJson(item));
+        Product temp=Product.fromJson(item);
+        if(userId!=temp.userId)
+          result.add(temp);
       }
       isDisplayLoading = false;
       result.shuffle();

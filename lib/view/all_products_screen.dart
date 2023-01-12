@@ -21,7 +21,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
 
   @override
   void initState() {
-    productEntryController.displayData(ALLPRODUCTS_COLL);
+    productEntryController.displayData(ALLPRODUCTS_COLL, userId: widget.userID);
     super.initState();
   }
 

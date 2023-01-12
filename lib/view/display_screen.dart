@@ -22,7 +22,7 @@ class _DisplayBookProductScreenState extends State<DisplayScreen> {
 
   @override
   void initState() {
-    productController.displayData(widget.collectionName);
+    productController.displayData(widget.collectionName, userId: widget.userID);
     super.initState();
   }
 
