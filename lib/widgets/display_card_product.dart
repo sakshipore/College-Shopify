@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayCardProduct extends StatelessWidget {
-  // TODO : make it final
-  Product data;
+  final Product data;
   DisplayCardProduct({super.key, required this.data});
 
   @override
@@ -34,10 +33,6 @@ class DisplayCardProduct extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // whiteText(text: "Product id: " + data.id.$oid),
-                  // SizedBox(
-                  //   height: 5.h,
-                  // ),
                   Text(
                     "Product Name: " + data.productName,
                     style: MyTextStyle.whiteLatoFont,

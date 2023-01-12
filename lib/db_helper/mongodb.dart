@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:college_shopify/db_helper/constants.dart';
-import 'package:college_shopify/model/mongodb_model.dart';
+import 'package:college_shopify/model/user.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
@@ -20,11 +20,11 @@ class MongoDatabase {
     }
   }
 
-  static delete(MongoDBModel user) async {
+  static delete(User user) async {
     await usersCollection.remove(where.id(user.id));
   }
 
-  static Future<Map<String, dynamic>> insert(MongoDBModel data) async {
+  static Future<Map<String, dynamic>> insert(User data) async {
     try {
       usersCollection = db.collection(COLL_NAME);
       var result = await usersCollection.insertOne(data.toJson());
@@ -85,17 +85,6 @@ class MongoDatabase {
     log(arrData.toString());
     return arrData;
   }
-
-  // static Future<Map<String, dynamic>?> checkUser(String mobNo) async {
-  //   Map<String, dynamic>? userData;
-  //   userData = await usersCollection.findOne({'mobNo': mobNo});
-  //   if (userData == null) {
-  //     return null;
-  //   } else {
-  //     log(userData.toString());
-  //     return userData;
-  //   }
-  // }
 
   static Future<Map<String, dynamic>?> fetchUserData(var userId) async {
     Map<String, dynamic>? userData;

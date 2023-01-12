@@ -1,8 +1,6 @@
 import 'package:college_shopify/constants/text_style.dart';
-import 'package:college_shopify/controller/login_controller.dart';
+import 'package:college_shopify/controller/auth_controller.dart';
 import 'package:college_shopify/router/routes_names.dart';
-import 'package:college_shopify/view/home_screen.dart';
-import 'package:college_shopify/view/signup_screen.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
@@ -19,7 +17,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
+    return GetBuilder<AuthController>(
       builder: (controller) {
         return Scaffold(
           body: controller.isLoading
@@ -88,26 +86,8 @@ class LoginScreen extends StatelessWidget {
                         Button(
                           text: "LOGIN",
                           onTap: () async {
-                            // TODO: Move all this login in controller
                             if (mobNoController.text.length == 10) {
-                              var userData = await controller
-                                  .checkUser(mobNoController.text);
-                              if (userData == null) {
-                                showSnackBar(
-                                    "Error occurred", "User doesn't exist !");
-                                // TODO : Named routes
-                                Get.to(
-                                  () => SignUpScreen(),
-                                );
-                              } else {
-                                userId = userData['id'];
-                                showSnackBar(
-                                    "User exists: ", userId.toString());
-                                Get.offAllNamed(
-                                  RoutesNames.homeScreen,
-                                  arguments: userId,
-                                );
-                              }
+                              await controller.checkUser(mobNoController.text);
                             } else {
                               showSnackBar(
                                   "Error occurred", "Enter valid number");

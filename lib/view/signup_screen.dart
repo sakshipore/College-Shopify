@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:college_shopify/constants/text_style.dart';
-import 'package:college_shopify/controller/login_controller.dart';
-import 'package:college_shopify/router/routes_names.dart';
+import 'package:college_shopify/controller/auth_controller.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
@@ -13,25 +10,13 @@ import 'package:get/get.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  final userController = Get.put(LoginController());
+  final userController = Get.put(AuthController());
   var userId;
-  // TODO : Move to controller and make textEditingCotrollers final
-  TextEditingController addressController = TextEditingController();
-  TextEditingController fnameController = TextEditingController();
-  TextEditingController lnameController = TextEditingController();
-  TextEditingController mobNoController = TextEditingController();
   bool inserted = false;
-
-  void _clearAll() {
-    addressController.text = "";
-    fnameController.text = "";
-    lnameController.text = "";
-    mobNoController.text = "";
-  }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
+    return GetBuilder<AuthController>(
       builder: (controller) {
         return Scaffold(
           body: controller.isLoading
@@ -58,23 +43,26 @@ class SignUpScreen extends StatelessWidget {
                             height: 75.h,
                           ),
                           FormText(
-                              text: "First Name", controller: fnameController),
+                              text: "First Name",
+                              controller: controller.fnameController),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
-                              text: "Last Name", controller: lnameController),
+                              text: "Last Name",
+                              controller: controller.lnameController),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
-                              text: "Address", controller: addressController),
+                              text: "Address",
+                              controller: controller.addressController),
                           SizedBox(
                             height: 10.h,
                           ),
                           FormText(
                             text: "Mobile No",
-                            controller: mobNoController,
+                            controller: controller.mobNoController,
                             onChanged: (value) {
                               if (value.length == 10) {
                                 FocusScope.of(context).unfocus();
@@ -102,28 +90,12 @@ class SignUpScreen extends StatelessWidget {
                           Button(
                             text: "SIGN UP",
                             onTap: () async {
-                              // TODO : Move all logic in controller
-                              if (mobNoController.text.length == 10 &&
-                                  fnameController.text != "" &&
-                                  lnameController.text != "" &&
-                                  addressController.text != "") {
-                                inserted = await controller.insertData(
-                                  fnameController.text,
-                                  lnameController.text,
-                                  addressController.text,
-                                  mobNoController.text,
-                                );
-                                _clearAll();
-                                if (inserted == true) {
-                                  Get.offAllNamed(
-                                    RoutesNames.homeScreen,
-                                    arguments: userId,
-                                  );
-                                  log("USER ID AFTER SIGN UP: $userId");
-                                } else {
-                                  showSnackBar(
-                                      "Error occurred", "Kindly insert again");
-                                }
+                              if (controller.mobNoController.text.length ==
+                                      10 &&
+                                  controller.fnameController.text != "" &&
+                                  controller.lnameController.text != "" &&
+                                  controller.addressController.text != "") {
+                                await controller.insertData();
                               } else {
                                 showSnackBar("Error occurred",
                                     "Enter valid credentials");

@@ -13,57 +13,38 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class ProductEntryController extends GetxController {
-  // final Rx<List<Book>> book = Rx<List<Book>>([]);
   var _id;
   bool isLoading = false;
   bool isDisplayLoading = true;
   String productImage = "";
   File? image;
-  // TODO : Make it List<Products> for that use Product.fromJson() for each item in displayData function
-  List<Map<String, dynamic>> result = [];
+  List<Product> result = [];
   TextEditingController productNameController = TextEditingController();
   TextEditingController productCostController = TextEditingController();
   TextEditingController productSpecificationController =
       TextEditingController();
   TextEditingController productTypeController = TextEditingController();
   String? selectedValue;
+  final productSizesList = ["Book", "Technical", "Stationary"];
 
-  Future<List<Map<String, dynamic>>> displayData(String collectionName) async {
+  Future<void> displayData(String collectionName) async {
     try {
-      result = await MongoDatabase.getCollectionData(collectionName);
-      int totalLength = result.length;
-      log(totalLength.toString());
+      List<Map<String, dynamic>> res =
+          await MongoDatabase.getCollectionData(collectionName);
+      result.clear();
+      for (Map<String, dynamic> item in res) {
+        result.add(Product.fromJson(item));
+      }
       isDisplayLoading = false;
       result.shuffle();
       update();
-      return result;
     } catch (e) {
       log(e.toString());
       showSnackBar("Error occurred", e.toString());
       isDisplayLoading = false;
       update();
-      return result;
     }
   }
-
-  // Future<List<Map<String, dynamic>>> displayCollectionData(
-  //     String collectionName) async {
-  //   try {
-  //     result = await MongoDatabase.getCollectionData(collectionName);
-  //     log(collectionName);
-  //     int totalLength = result.length;
-  //     log(totalLength.toString());
-  //     isDisplayLoading = false;
-  //     update();
-  //     return result;
-  //   } catch (e) {
-  //     log(e.toString());
-  //     showSnackBar("Error occurred", e.toString());
-  //     isDisplayLoading = false;
-  //     update();
-  //     return result;
-  //   }
-  // }
 
   void updateDropDown(String value) {
     selectedValue = value;
@@ -94,7 +75,7 @@ class ProductEntryController extends GetxController {
       log(result.toString());
 
       if (result["Success"] == true) {
-        await updateData(_id, userId);
+        await updateUserData(_id, userId);
         await segregateData(selectedValue!, userId, data);
         Get.toNamed(
           RoutesNames.homeScreen,
@@ -142,31 +123,14 @@ class ProductEntryController extends GetxController {
     }
   }
 
-  Future<void> updateBoughtData(var userId, var productId) async {
-    try {
-      // TODO : Waaah
-      await updateBoughtData(userId, productId);
-      Get.toNamed(
-        RoutesNames.homeScreen,
-        arguments: userId,
-      );
-      showSnackBar("Updated ID: ", "$userId");
-    } catch (e) {
-      log(e.toString());
-      showSnackBar("Error occurred", e.toString());
-    }
-  }
-
   clearAll() {
-    // TODO : make productNameController.clear()
-    productNameController.text = "";
-    productCostController.text = "";
-    productSpecificationController.text = "";
-    productTypeController.text = "";
+    productNameController.clear();
+    productCostController.clear();
+    productSpecificationController.clear();
+    productTypeController.clear();
   }
 
-  // TODO : Give return type
-  selectImage() async {
+  Future<void> selectImage() async {
     File? temp = await pickImage();
     if (temp != null) {
       image = temp;

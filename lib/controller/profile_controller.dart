@@ -1,19 +1,16 @@
 import 'dart:developer';
 
 import 'package:college_shopify/db_helper/mongodb.dart';
-import 'package:college_shopify/model/mongodb_model.dart';
+import 'package:college_shopify/model/user.dart';
 import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  final Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
-
   Map<String, dynamic>? result = {};
   bool isLoading = true;
   bool isDisplayLoading = true;
-  // TODO : Rename it to user
-  MongoDBModel? data;
+  User? user;
   List<Product> uploadedProducts = [];
   List<Product> boughtProducts = [];
 
@@ -21,17 +18,17 @@ class ProfileController extends GetxController {
     try {
       result = await MongoDatabase.fetchUserData(userId);
       log(result.toString());
-      data = MongoDBModel.fromJson(result!);
-      log("PROFILE DATA: " + data.toString());
+      user = User.fromJson(result!);
+      log("PROFILE DATA: " + user.toString());
 
       //! Uploaded products
-      for (var item in data?.product ?? []) {
+      for (var item in user?.product ?? []) {
         Product? temp = await productData(item);
         uploadedProducts.add(temp!);
       }
 
       //! Bought products
-      for (var item in data?.boughtProducts ?? []) {
+      for (var item in user?.boughtProducts ?? []) {
         Product? temp = await productData(item);
         boughtProducts.add(temp!);
       }

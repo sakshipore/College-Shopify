@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "User id: " + controller.data!.id.toString(),
+                                "User id: " + controller.user!.id.toString(),
                                 style: MyTextStyle.normalLatoFont,
                               ),
                               SizedBox(
@@ -62,23 +62,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 "Name: " +
-                                    controller.data!.fname +
+                                    controller.user!.fname +
                                     " " +
-                                    controller.data!.lname,
+                                    controller.user!.lname,
                                 style: MyTextStyle.normalLatoFont,
                               ),
                               SizedBox(
                                 height: 10.h,
                               ),
                               Text(
-                                "Address: " + controller.data!.address,
+                                "Address: " + controller.user!.address,
                                 style: MyTextStyle.normalLatoFont,
                               ),
                               SizedBox(
                                 height: 10.h,
                               ),
                               Text(
-                                "Mobile no.: " + controller.data!.mobNo,
+                                "Mobile no.: " + controller.user!.mobNo,
                                 style: MyTextStyle.normalLatoFont,
                               ),
                               SizedBox(

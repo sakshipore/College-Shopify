@@ -1,7 +1,6 @@
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/product_controller.dart';
 import 'package:college_shopify/db_helper/constants.dart';
-import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
 import 'package:flutter/material.dart';
@@ -57,23 +56,19 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                 : controller.result.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              // TODO : Dont need to do this when list is of type List<Product>
-                              Product data = Product.fromJson(
-                                controller.result[index],
-                              );
+                            itemBuilder: (context, index) {                              
                               return GestureDetector(
                                 onTap: () {
                                   Get.toNamed(
                                     RoutesNames.displayData,
                                     arguments: {
-                                      "userId": data.userId,
-                                      "productId": data.productId,
+                                      "userId": controller.result[index].userId,
+                                      "productId": controller.result[index].productId,
                                     },
                                   );
                                 },
                                 child: DisplayCardProduct(
-                                  data: data,
+                                  data: controller.result[index],
                                 ),
                               );
                             },

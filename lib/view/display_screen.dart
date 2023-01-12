@@ -1,8 +1,6 @@
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/controller/product_controller.dart';
-import 'package:college_shopify/model/products.dart';
 import 'package:college_shopify/router/routes_names.dart';
-import 'package:college_shopify/view/display_data.dart';
 import 'package:college_shopify/widgets/display_card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,22 +53,19 @@ class _DisplayBookProductScreenState extends State<DisplayScreen> {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              // TODO : Will change when List will be of type List<Product>
-                              Product data = Product.fromJson(
-                                controller.result[index],
-                              );
                               return GestureDetector(
                                 onTap: () {
                                   Get.toNamed(
                                     RoutesNames.displayData,
                                     arguments: {
                                       "userId": widget.userID,
-                                      "productId": data.productId,
+                                      "productId":
+                                          controller.result[index].productId,
                                     },
                                   );
                                 },
                                 child: DisplayCardProduct(
-                                  data: data,
+                                  data: controller.result[index],
                                 ),
                               );
                             },

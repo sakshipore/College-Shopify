@@ -1,10 +1,10 @@
 import 'package:college_shopify/constants/text_style.dart';
-import 'package:college_shopify/model/mongodb_model.dart';
+import 'package:college_shopify/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DisplayCardData extends StatelessWidget {
-  MongoDBModel data;
+  User data;
   DisplayCardData({super.key, required this.data});
 
   @override

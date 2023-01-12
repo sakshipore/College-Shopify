@@ -1,7 +1,6 @@
 import 'package:college_shopify/constants/text_style.dart';
 import 'package:college_shopify/db_helper/constants.dart';
 import 'package:college_shopify/router/routes_names.dart';
-import 'package:college_shopify/view/display_screen.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

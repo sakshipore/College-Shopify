@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:mongo_dart/mongo_dart.dart';
 
-MongoDBModel mongoDBModelfromJson(String str) =>
-    MongoDBModel.fromJson(json.decode(str));
+User mongoDBModelfromJson(String str) => User.fromJson(json.decode(str));
 
-String mongoDBModeltoJson(MongoDBModel data) => json.encode(data.toJson());
+String mongoDBModeltoJson(User data) => json.encode(data.toJson());
 
-// TODO : Change name
-class MongoDBModel {
+class User {
   ObjectId id;
   String address;
   String fname;
@@ -17,7 +15,7 @@ class MongoDBModel {
   List product;
   List boughtProducts;
 
-  MongoDBModel({
+  User({
     required this.id,
     required this.address,
     required this.fname,
@@ -27,7 +25,7 @@ class MongoDBModel {
     required this.boughtProducts,
   });
 
-  factory MongoDBModel.fromJson(Map<String, dynamic> json) => MongoDBModel(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         address: json["address"],
         fname: json["fname"],

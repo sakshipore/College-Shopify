@@ -25,9 +25,6 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
   final ProductEntryController productEntryController =
       Get.put(ProductEntryController());
 
-  // TODO : Shift to ProductEntryController
-  final _productSizesList = ["Book", "Technical", "Stationary"];
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProductEntryController>(
@@ -71,31 +68,12 @@ class _NewProductEntryScreenState extends State<ProductEntryScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          // DropdownButton(
-                          //   // value: _selectedValue,
-                          //   value: controller.selectedValue,
-                          //   items: _productSizesList
-                          //       .map(
-                          //         (e) => DropdownMenuItem(
-                          //           child: Text(e),
-                          //           value: e,
-                          //         ),
-                          //       )
-                          //       .toList(),
-                          //   onChanged: (value) {
-                          //     // setState(() {
-                          //     //   _selectedValue = value;
-                          //     // });
-                          //     controller.updateDropDown(value!);
-                          //     // log(dropDownValue.toString());
-                          //   },
-                          // ),
                           SizedBox(
                             height: 45.h,
                             width: 330.w,
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton(
-                                items: _productSizesList
+                                items: controller.productSizesList
                                     .map(
                                       (e) => DropdownMenuItem(
                                         child: Text(e),
