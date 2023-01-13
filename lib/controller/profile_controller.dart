@@ -22,12 +22,14 @@ class ProfileController extends GetxController {
       log("PROFILE DATA: " + user.toString());
 
       //! Uploaded products
+      uploadedProducts.clear();
       for (var item in user?.product ?? []) {
         Product? temp = await productData(item);
         uploadedProducts.add(temp!);
       }
 
       //! Bought products
+      boughtProducts.clear();
       for (var item in user?.boughtProducts ?? []) {
         Product? temp = await productData(item);
         boughtProducts.add(temp!);
