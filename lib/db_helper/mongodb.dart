@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:college_shopify/db_helper/constants.dart';
-import 'package:college_shopify/model/mongodb_model.dart';
+import 'package:college_shopify/model/user.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
@@ -20,11 +20,11 @@ class MongoDatabase {
     }
   }
 
-  static delete(MongoDBModel user) async {
+  static delete(User user) async {
     await usersCollection.remove(where.id(user.id));
   }
 
-  static Future<Map<String, dynamic>> insert(MongoDBModel data) async {
+  static Future<Map<String, dynamic>> insert(User data) async {
     try {
       usersCollection = db.collection(COLL_NAME);
       var result = await usersCollection.insertOne(data.toJson());
@@ -47,21 +47,43 @@ class MongoDatabase {
     }
   }
 
-  static Future<List<Map<String, dynamic>>> getData() async {
-    final arrData = await usersCollection.find().toList();
+  static Future<Map<String, dynamic>> insertByCollectionName(
+      Map<String, dynamic> data, String collectionName) async {
+    try {
+      DbCollection collection = db.collection(collectionName);
+      log("COLLECTION-> $collectionName");
+      var result = await collection.insertOne(data);
+      if (result.isSuccess) {
+        return {
+          "Success": true,
+          "Msg": "Data inserted",
+        };
+      } else {
+        return {
+          "Success": false,
+          "Msg": "Something went wrong",
+        };
+      }
+    } catch (e) {
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getCollectionData(
+      String collectionName) async {
+    DbCollection collection = db.collection(collectionName);
+    final arrData = await collection.find().toList();
     log(arrData.toString());
     return arrData;
   }
 
-  static Future<Map<String, dynamic>?> checkUser(String mobNo) async {
-    Map<String, dynamic>? userData;
-    userData = await usersCollection.findOne({'mobNo': mobNo});
-    if (userData == null) {
-      return null;
-    } else {
-      log(userData.toString());
-      return userData;
-    }
+  static Future<List<Map<String, dynamic>>> getData() async {
+    final arrData = await usersCollection.find().toList();
+    log(arrData.toString());
+    return arrData;
   }
 
   static Future<Map<String, dynamic>?> fetchUserData(var userId) async {
@@ -75,11 +97,37 @@ class MongoDatabase {
     }
   }
 
+  static Future<Map<String, dynamic>?> fetchProductData(var productId) async {
+    Map<String, dynamic>? userData;
+    DbCollection allProductCollection = db.collection(ALLPRODUCTS_COLL);
+    userData = await allProductCollection.findOne({'productId': productId});
+    if (userData == null) {
+      return null;
+    } else {
+      log(userData.toString());
+      return userData;
+    }
+  }
+
   static Future<Map<String, dynamic>> update(
       var userId, List productIds) async {
     try {
       var result = await usersCollection.update(
           where.eq('id', userId), modify.set('product', productIds));
+      return result;
+    } catch (e) {
+      return {
+        "Success": false,
+        "Msg": e.toString(),
+      };
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateBuyProduct(
+      var userId, List productIds) async {
+    try {
+      var result = await usersCollection.update(
+          where.eq('id', userId), modify.set('boughtProducts', productIds));
       return result;
     } catch (e) {
       return {
