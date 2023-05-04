@@ -1,11 +1,11 @@
-import 'package:college_shopify/model/technical.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
+import 'package:college_shopify/constants/text_style.dart';
+import 'package:college_shopify/model/products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DisplayCardTechnical extends StatelessWidget {
-  Technical data;
-  DisplayCardTechnical({super.key, required this.data});
+class DisplayCardProduct extends StatelessWidget {
+  final Product data;
+  DisplayCardProduct({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class DisplayCardTechnical extends StatelessWidget {
                       fit: BoxFit.cover,
                     )
                   : Image.asset(
-                      "assets/images/technical_product.jpg",
+                      "assets/images/book_product.jpg",
                       fit: BoxFit.cover,
                     ),
             ),
@@ -33,31 +33,24 @@ class DisplayCardTechnical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // whiteText(text: "Product id: " + data.id.$oid),
-                  // SizedBox(
-                  //   height: 5.h,
-                  // ),
-                  whiteText(text: "Name of Product: " + data.name),
+                  Text(
+                    "Product Name: " + data.productName,
+                    style: MyTextStyle.whiteLatoFont,
+                  ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Company Name: " + data.companyName),
+                  Text(
+                    "Product Specification: " + data.productSpecification,
+                    style: MyTextStyle.whiteLatoFont,
+                  ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  whiteText(text: "Model no.: " + data.modelNo),
-                  SizedBox(
-                    height: 5.h,
+                  Text(
+                    "Product Cost: " + data.productCost,
+                    style: MyTextStyle.whiteLatoFont,
                   ),
-                  whiteText(text: "Specification: " + data.specification),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  whiteText(text: "Bill no.: " + data.billNo),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  whiteText(text: "Cost: " + data.cost),
                   SizedBox(
                     height: 5.h,
                   ),

@@ -1,150 +1,114 @@
-import 'dart:developer';
-
-import 'package:college_shopify/db_helper/mongodb.dart';
-import 'package:college_shopify/model/mongodb_model.dart';
-import 'package:college_shopify/view/home_screen.dart';
+import 'package:college_shopify/constants/text_style.dart';
+import 'package:college_shopify/controller/auth_controller.dart';
 import 'package:college_shopify/widgets/button.dart';
 import 'package:college_shopify/widgets/form_text.dart';
-import 'package:college_shopify/widgets/heading_text.dart';
-import 'package:college_shopify/widgets/normal_text.dart';
 import 'package:college_shopify/widgets/snackbar_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mongo_dart/mongo_dart.dart' as M;
+import 'package:get/get.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  SignUpScreen({super.key});
 
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController addressController = TextEditingController();
-  TextEditingController fnameController = TextEditingController();
-  TextEditingController lnameController = TextEditingController();
-  TextEditingController mobNoController = TextEditingController();
-  bool isLoading = false;
+  final userController = Get.put(AuthController());
   var userId;
   bool inserted = false;
 
-  Future<bool> _insertData(
-      String fname, String lname, String address, String mobNo) async {
-    setState(() {
-      isLoading = true;
-    });
-    userId = M.ObjectId();
-    final data = MongoDBModel(
-      id: userId,
-      address: address,
-      fname: fname,
-      lname: lname,
-      mobNo: mobNo,
-      product: [],
-    );
-    Map<String, dynamic> result = await MongoDatabase.insert(data);
-    log(result.toString());
-    setState(() {
-      isLoading = false;
-    });
-
-    if (result["Success"] == true) {
-      inserted = true;
-      showSnackBar(context, "Inserted ID: ${userId.$oid}");
-    } else {
-      inserted = false;
-      showSnackBar(context, result["Msg"]);
-    }
-
-    _clearAll();
-    return inserted;
-  }
-
-  void _clearAll() {
-    addressController.text = "";
-    fnameController.text = "";
-    lnameController.text = "";
-    mobNoController.text = "";
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: Color(0xff2140B1),
-              ),
-            )
-          : SafeArea(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 50.h,
-                      ),
-                      headingText(text: "Sign Up"),
-                      SizedBox(
-                        height: 75.h,
-                      ),
-                      FormText(text: "First Name", controller: fnameController),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      FormText(text: "Last Name", controller: lnameController),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      FormText(text: "Address", controller: addressController),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      FormText(text: "Mobile No", controller: mobNoController),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 170.w),
-                          child: normalText(text: "Already have an account?"),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      Button(
-                        text: "SIGN UP",
-                        onTap: () async {
-                          await _insertData(
-                            fnameController.text,
-                            lnameController.text,
-                            addressController.text,
-                            mobNoController.text,
-                          );
-                          if (inserted == true) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    HomeScreen(userId: userId),
+    return GetBuilder<AuthController>(
+      builder: (controller) {
+        return Scaffold(
+          body: controller.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xff2140B1),
+                  ),
+                )
+              : SafeArea(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 100.h,
+                          ),
+                          Text(
+                            "Sign Up",
+                            style: MyTextStyle.headingLatoFont,
+                          ),
+                          SizedBox(
+                            height: 75.h,
+                          ),
+                          FormText(
+                              text: "First Name",
+                              controller: controller.fnameController),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          FormText(
+                              text: "Last Name",
+                              controller: controller.lnameController),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          FormText(
+                              text: "Address",
+                              controller: controller.addressController),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          FormText(
+                            text: "Mobile No",
+                            controller: controller.mobNoController,
+                            onChanged: (value) {
+                              if (value.length == 10) {
+                                FocusScope.of(context).unfocus();
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 170.w),
+                              child: Text(
+                                "Already have an account?",
+                                style: MyTextStyle.normalLatoFont,
                               ),
-                            );
-                          } else {
-                            normalText(text: "Error Occurred");
-                          }
-                        },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Button(
+                            text: "SIGN UP",
+                            onTap: () async {
+                              if (controller.mobNoController.text.length ==
+                                      10 &&
+                                  controller.fnameController.text != "" &&
+                                  controller.lnameController.text != "" &&
+                                  controller.addressController.text != "") {
+                                await controller.insertData();
+                              } else {
+                                showSnackBar("Error occurred",
+                                    "Enter valid credentials");
+                              }
+                            },
+                          )
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
+        );
+      },
     );
   }
 }

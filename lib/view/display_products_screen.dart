@@ -1,20 +1,15 @@
-import 'package:college_shopify/view/display_book_product_screen.dart';
-import 'package:college_shopify/view/display_stationary_product_screen.dart';
-import 'package:college_shopify/view/display_technical_product_screen.dart';
-import 'package:college_shopify/widgets/heading_text.dart';
+import 'package:college_shopify/constants/text_style.dart';
+import 'package:college_shopify/db_helper/constants.dart';
+import 'package:college_shopify/router/routes_names.dart';
 import 'package:college_shopify/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class DisplayProductsScreen extends StatefulWidget {
+class DisplayProductsScreen extends StatelessWidget {
   var userId;
   DisplayProductsScreen({super.key, required this.userId});
 
-  @override
-  State<DisplayProductsScreen> createState() => _DisplayProductsScreenState();
-}
-
-class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +23,7 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                 SizedBox(
                   height: 50.h,
                 ),
-                headingText(text: "Products"),
+                Text("Products", style: MyTextStyle.headingLatoFont),
                 SizedBox(
                   height: 75.h,
                 ),
@@ -37,11 +32,12 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/book_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayBookProductScreen(),
-                      ),
+                    Get.toNamed(
+                      RoutesNames.displayProductsScreen,
+                      arguments: {
+                        "userID": userId,
+                        "collectionName": BOOK_COLL,
+                      },
                     );
                   },
                 ),
@@ -53,11 +49,12 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/stationary_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayStationaryProductScreen(),
-                      ),
+                    Get.toNamed(
+                      RoutesNames.displayProductsScreen,
+                      arguments: {
+                        "userID": userId,
+                        "collectionName": STATIONARY_COLL,
+                      },
                     );
                   },
                 ),
@@ -69,11 +66,12 @@ class _DisplayProductsScreenState extends State<DisplayProductsScreen> {
                   image: "assets/images/technical_product.jpg",
                   height: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DisplayTechnicalProductScreen(),
-                      ),
+                    Get.toNamed(
+                      RoutesNames.displayProductsScreen,
+                      arguments: {
+                        "userID": userId,
+                        "collectionName": TECHNICAL_COLL,
+                      },
                     );
                   },
                 ),

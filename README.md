@@ -1,16 +1,17 @@
-# college_shopify
+# College Shopify App
 
-A new Flutter project.
+TechStack used:- 
+`Flutter` 
+`Firebase`
+`GetX State Management` 
+`MongoDB`
 
-## Getting Started
+## About the Application
 
-This project is a starting point for a Flutter application.
+College Shopify is a **Flutter** App using **GetX State Management**, **Firebase** and **MongoDB**. 
+* It is an application which can be used by *college students* to sell and buy books, stationary and technical items.
+* MongoDB is used to store the data of the products and users.
+* When an image of the product is uploaded, it is stored in Firebase. We then receive the URL of the image which can be stored in MongoDB
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Following is the link to the recorded video of the application:-
+[Video Link](https://drive.google.com/file/d/1fXfzH5ks0e_FYktGp_fQ6wWj5xyLyJg6/view?usp=sharing)
